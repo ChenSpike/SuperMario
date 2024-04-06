@@ -13,7 +13,8 @@ SOURCES += \
     koopa_test.cpp \
     main.cpp \
     mainwindow.cpp \
-    player.cpp
+    player.cpp \
+    testtest.cpp
 
 HEADERS += \
     game.h \
