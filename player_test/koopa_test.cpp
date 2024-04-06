@@ -2,5 +2,5 @@
 
 koopa_test::koopa_test()
 {
-
+    // create a boss
 }
