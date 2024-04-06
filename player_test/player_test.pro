@@ -10,12 +10,14 @@ CONFIG += c++11
 
 SOURCES += \
     game.cpp \
+    koopa_test.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp
 
 HEADERS += \
     game.h \
+    koopa_test.h \
     mainwindow.h \
     player.h
 
