@@ -54,11 +54,17 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../../floorbrickitem.cpp \
 		../../main.cpp \
-		../../mainwindow.cpp moc_mainwindow.cpp
+		../../mainwindow.cpp \
+		../../player.cpp qrc_background_scene_resource.cpp \
+		moc_mainwindow.cpp \
+		moc_player.cpp
 OBJECTS       = floorbrickitem.o \
 		main.o \
 		mainwindow.o \
-		moc_mainwindow.o
+		player.o \
+		qrc_background_scene_resource.o \
+		moc_mainwindow.o \
+		moc_player.o
 DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/spec_pre.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/device_config.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/common/unix.conf \
@@ -280,6 +286,7 @@ DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/f
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/qt_config.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang/qmake.conf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/exclusive_builds.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/mac/sdk.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/toolchain.prf \
@@ -309,9 +316,12 @@ DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/f
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/yacc.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/lex.prf \
 		../../../../background_scene.pro ../../floorbrick.h \
-		../../mainwindow.h ../../floorbrickitem.cpp \
+		../../game.h \
+		../../mainwindow.h \
+		../../player.h ../../floorbrickitem.cpp \
 		../../main.cpp \
-		../../mainwindow.cpp
+		../../mainwindow.cpp \
+		../../player.cpp
 QMAKE_TARGET  = background_scene
 DESTDIR       = 
 TARGET        = background_scene.app/Contents/MacOS/background_scene
@@ -320,7 +330,7 @@ TARGET        = background_scene.app/Contents/MacOS/background_scene
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 14.4
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene/build/Qt_6_2_2_for_macOS-Debug/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64 arm64
 EXPORT_DEFAULT_ARCHS = arm64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -557,6 +567,7 @@ Makefile: ../../background_scene.pro /Users/sophiawannnsmacbookair/Applications/
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/qt_config.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang/qmake.conf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/exclusive_builds.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/mac/sdk.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/toolchain.prf \
@@ -586,6 +597,7 @@ Makefile: ../../background_scene.pro /Users/sophiawannnsmacbookair/Applications/
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/yacc.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/lex.prf \
 		../../background_scene.pro \
+		../../background_scene_resource.qrc \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Resources/QtGui.prl \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Resources/QtCore.prl
@@ -811,6 +823,7 @@ Makefile: ../../background_scene.pro /Users/sophiawannnsmacbookair/Applications/
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/qt_config.prf:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang/qmake.conf:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/exclusive_builds.prf:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/mac/sdk.prf:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/toolchain.prf:
@@ -840,6 +853,7 @@ Makefile: ../../background_scene.pro /Users/sophiawannnsmacbookair/Applications/
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/yacc.prf:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/lex.prf:
 ../../background_scene.pro:
+../../background_scene_resource.qrc:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Resources/QtGui.prl:
 /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Resources/QtCore.prl:
@@ -872,8 +886,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../floorbrick.h ../../mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../floorbrickitem.cpp ../../main.cpp ../../mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../background_scene_resource.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../../floorbrick.h ../../game.h ../../mainwindow.h ../../player.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../floorbrickitem.cpp ../../main.cpp ../../mainwindow.cpp ../../player.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -884,6 +899,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r background_scene.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -900,16 +916,52 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_background_scene_resource.cpp
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp
+	-$(DEL_FILE) qrc_background_scene_resource.cpp
+qrc_background_scene_resource.cpp: ../../background_scene_resource.qrc \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/rcc \
+		../../dataset/s_mario_stop_R.png \
+		../../dataset/s_mario_stop_L.png \
+		../../dataset/s_mario_jump1_R.png \
+		../../dataset/s_mario_run1_R.png \
+		../../dataset/s_mario_run1_L.png \
+		../../dataset/s_mario_jump1_L.png \
+		../../dataset/background_7000pixel.png \
+		../../dataset/broken\ brick.png \
+		../../dataset/water\ pipe.png \
+		../../dataset/s_mario_die.png \
+		../../dataset/s_mario_stand_R.png \
+		../../dataset/box\ brick.png \
+		../../dataset/s_mario_jump2_L.png \
+		../../dataset/floor\ brick.png \
+		../../dataset/normal\ brick.png \
+		../../dataset/s_mario_stand_L.png \
+		../../dataset/s_mario_run2_R.png \
+		../../dataset/s_mario_jump2_R.png \
+		../../dataset/stone\ brick.png \
+		../../dataset/s_mario_run2_L.png
+	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/rcc -name background_scene_resource ../../background_scene_resource.qrc -o qrc_background_scene_resource.cpp
+
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_player.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_player.cpp
 moc_mainwindow.cpp: ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc
 	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=15 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang -I/Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib ../../mainwindow.h -o moc_mainwindow.cpp
+
+moc_player.cpp: ../../player.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc
+	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=15 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang -I/Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib ../../player.h -o moc_player.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -930,13 +982,15 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
 floorbrickitem.o: ../../floorbrickitem.cpp ../../floorbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o floorbrickitem.o ../../floorbrickitem.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
@@ -945,12 +999,28 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../floorbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QApplication \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../player.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../game.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QApplication \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QFont \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qfont.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QBrush \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qbrush.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QImage \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qimage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -959,8 +1029,28 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
+player.o: ../../player.cpp ../../player.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QKeyEvent \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qevent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../../player.cpp
+
+qrc_background_scene_resource.o: qrc_background_scene_resource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_background_scene_resource.o qrc_background_scene_resource.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_player.o: moc_player.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_player.o moc_player.cpp
 
 ####### Install
 

@@ -19,33 +19,27 @@ int main(int argc, char *argv[])
     QGraphicsScene *scene = new QGraphicsScene();
 
     //load background image
-    QPixmap pixmap("/Users/sophiawannnsmacbookair/Downloads/background_7000pixel");
+    QPixmap pixmap(":/new/dataset/dataset/background_7000pixel.png");
     //"":insert image's path
 
     //add the image to the scene
-    QGraphicsPixmapItem* item = scene ->addPixmap(pixmap);
+    QGraphicsPixmapItem* background = scene ->addPixmap(pixmap);
+    background -> setPos(0,0);
 
     // create the player
-    mario = new Player();
-    mario->setPos(400,500); // TODO generalize to always be in the middle bottom of screen
+    Player *mario = new Player();
+    mario->setPos(200,450); // TODO generalize to always be in the middle bottom of screen
     // make the player focusable and set it to be the current focus
     mario->setFlag(QGraphicsItem::ItemIsFocusable);
     mario->setFocus();
     scene ->addItem(mario);
 
     //add floor brick item
-    QPixmap FloorBrickImage("/Users/sophiawannnsmacbookair/Downloads/floor brick.png");
-    //floor brick image path
-    for (int x=0;x<139;x++){
-        if (x == 15||16||45||46||80||81){
-            continue;
-        }//use "if loop" to make three holes (100 pixels width/hole)
-        FloorBrick* brick = new FloorBrick(FloorBrickImage);
-        brick -> setPos(x*50,0);//floor brick width = 50 pixel
-        scene -> addItem(brick);
-    }
+    FloorBrick::CreateFloorBricks(scene);
 
     //visualize (view)
+    QGraphicsView *view = new QGraphicsView(scene);
+
     //set the view size
     view -> setFixedSize(1400,620);
     view -> show();

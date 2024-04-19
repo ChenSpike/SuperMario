@@ -6,7 +6,7 @@
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 
     // set graphic
-    setPixmap(QPixmap(":/image/s_mario_run1_R.png"));
+    setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
     jumpTimer = new QTimer(this);
     connect(jumpTimer, &QTimer::timeout, this, &Player::jumpStep);
     velocity = 0; // 初始速度
@@ -17,12 +17,12 @@ void Player::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Left){
         if (pos().x() > 0)
             setPos(x()-50,y());
-        setPixmap(QPixmap(":/image/s_mario_run1_L.png"));
+        setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
     }
     else if (event->key() == Qt::Key_Right){
-        if (pos().x() + 100 < 800)
+        if (pos().x() + 100 < 7000)
             setPos(x()+50,y());
-        setPixmap(QPixmap(":/image/s_mario_run1_R.png"));
+        setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
     }
     if (event->key() == Qt::Key_Space && !isJumping) {
         isJumping = true; // 开始跳跃

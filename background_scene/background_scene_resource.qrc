@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/new/dataset">
+        <file>dataset/background_7000pixel.png</file>
+        <file>dataset/water pipe.png</file>
+        <file>dataset/box brick.png</file>
+        <file>dataset/broken brick.png</file>
+        <file>dataset/floor brick.png</file>
+        <file>dataset/normal brick.png</file>
+        <file>dataset/stone brick.png</file>
+        <file>dataset/s_mario_die.png</file>
+        <file>dataset/s_mario_stop_R.png</file>
+        <file>dataset/s_mario_stop_L.png</file>
+        <file>dataset/s_mario_stand_R.png</file>
+        <file>dataset/s_mario_run1_L.png</file>
+        <file>dataset/s_mario_run1_R.png</file>
+        <file>dataset/s_mario_run2_L.png</file>
+        <file>dataset/s_mario_run2_R.png</file>
+        <file>dataset/s_mario_stand_L.png</file>
+        <file>dataset/s_mario_jump2_R.png</file>
+        <file>dataset/s_mario_jump2_L.png</file>
+        <file>dataset/s_mario_jump1_R.png</file>
+        <file>dataset/s_mario_jump1_L.png</file>
+    </qresource>
+</RCC>

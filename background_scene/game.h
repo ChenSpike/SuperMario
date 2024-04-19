@@ -10,8 +10,8 @@ class Game: public QGraphicsView{
 public:
     Game(QWidget * parent=0);
 
-    QGraphicsScene * scene;
-    Player * mario;
+    QGraphicsScene *scene;
+    Player *mario;
 };
 
 #endif // GAME_H
