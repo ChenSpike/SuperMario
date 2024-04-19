@@ -52,13 +52,15 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../floorbrickitem.cpp \
+SOURCES       = ../../boxbrick.cpp \
+		../../floorbrickitem.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../player.cpp qrc_background_scene_resource.cpp \
 		moc_mainwindow.cpp \
 		moc_player.cpp
-OBJECTS       = floorbrickitem.o \
+OBJECTS       = boxbrick.o \
+		floorbrickitem.o \
 		main.o \
 		mainwindow.o \
 		player.o \
@@ -315,10 +317,13 @@ DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/f
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/exceptions.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/yacc.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/lex.prf \
-		../../../../background_scene.pro ../../floorbrick.h \
+		../../../../background_scene.pro ../../boxbrick.h \
+		../../floorbrick.h \
 		../../game.h \
 		../../mainwindow.h \
-		../../player.h ../../floorbrickitem.cpp \
+		../../player.h \
+		../../stonebrick.h ../../boxbrick.cpp \
+		../../floorbrickitem.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../player.cpp
@@ -887,8 +892,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../background_scene_resource.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../floorbrick.h ../../game.h ../../mainwindow.h ../../player.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../floorbrickitem.cpp ../../main.cpp ../../mainwindow.cpp ../../player.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../boxbrick.h ../../floorbrick.h ../../game.h ../../mainwindow.h ../../player.h ../../stonebrick.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../boxbrick.cpp ../../floorbrickitem.cpp ../../main.cpp ../../mainwindow.cpp ../../player.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -986,6 +991,16 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
+boxbrick.o: ../../boxbrick.cpp ../../boxbrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		../../stonebrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QList \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qlist.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boxbrick.o ../../boxbrick.cpp
+
 floorbrickitem.o: ../../floorbrickitem.cpp ../../floorbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
@@ -1001,6 +1016,10 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../stonebrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		../../boxbrick.h \
 		../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \

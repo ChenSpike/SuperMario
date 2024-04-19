@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "floorbrick.h"
+#include "stonebrick.h"
+#include "boxbrick.h"
 #include "player.h"
 #include "game.h"
 #include <QApplication>
@@ -36,6 +38,9 @@ int main(int argc, char *argv[])
 
     //add floor brick item
     FloorBrick::CreateFloorBricks(scene);
+
+    //add box brick item
+    BoxBrick::CreateBoxBricks(scene);
 
     //visualize (view)
     QGraphicsView *view = new QGraphicsView(scene);
