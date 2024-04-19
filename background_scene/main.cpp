@@ -4,6 +4,7 @@
 #include "boxbrick.h"
 #include "player.h"
 #include "game.h"
+#include "brokenbrick.h"
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -39,8 +40,11 @@ int main(int argc, char *argv[])
     //add floor brick item
     FloorBrick::CreateFloorBricks(scene);
 
-    //add box brick item
+    //add box brick item (要再加collide())
     BoxBrick::CreateBoxBricks(scene);
+
+    //add broken brick item
+    BrokenBrick::CreateBrokenBricks(scene);
 
     //visualize (view)
     QGraphicsView *view = new QGraphicsView(scene);

@@ -10,13 +10,15 @@ CONFIG += c++11
 
 SOURCES += \
     boxbrick.cpp \
-    floorbrickitem.cpp \
+    brokenbrick.cpp \
+    floorbrick.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp
 
 HEADERS += \
     boxbrick.h \
+    brokenbrick.h \
     floorbrick.h \
     game.h \
     mainwindow.h \
