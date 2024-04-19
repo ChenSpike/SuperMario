@@ -11,6 +11,8 @@
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QGraphicsTextItem>
+#include <QDialog>
+#include <QPushButton>
 #include <QFont>
 #include <QBrush>
 #include <QImage>
@@ -18,6 +20,16 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    //create start window
+    QDialog start;
+    start.setWindowTitle("Start the Game");
+    //push button to start the game
+    QPushButton startbutton("Start Game", &start);
+    startbutton.setGeometry(50,50,200,50);
+    //connect button click signal to start the game
+    QObject::connect(&startbutton, &QPushButton::clicked, [&](){
+    start.close();
     //create a scene
     QGraphicsScene *scene = new QGraphicsScene();
 
@@ -52,7 +64,9 @@ int main(int argc, char *argv[])
     //set the view size
     view -> setFixedSize(1400,620);
     view -> show();
+    });
 
+    start.exec(); //show the start dialog
 
     return a.exec();
 }
