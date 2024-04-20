@@ -12,6 +12,8 @@ SOURCES += \
     boxbrick.cpp \
     coin.cpp \
     floorbrickitem.cpp \
+    brokenbrick.cpp \
+    floorbrick.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp
@@ -19,10 +21,12 @@ SOURCES += \
 HEADERS += \
     boxbrick.h \
     coin.h \
+    brokenbrick.h \
     floorbrick.h \
     game.h \
     mainwindow.h \
-    player.h
+    player.h \
+    stonebrick.h
 
 FORMS += \
     mainwindow.ui

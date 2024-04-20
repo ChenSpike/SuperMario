@@ -2,13 +2,17 @@
 #define BOXBRICK_H
 
 #include <QGraphicsPixmapItem>
-#include <QObject>
 #include <QGraphicsScene>
+#include <QObject>
+#include <QPixmap>
 
 class BoxBrick: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     BoxBrick(QGraphicsScene *scene); // Constructor that takes QGraphicsScene as parameter
+    BoxBrick(const QPixmap& pixmap);
+    static void CreateBoxBricks(QGraphicsScene* scene);
+    void collide(); // change boxbrick to stonebrick
 public slots:
     void handleCollision(); // Slot to handle collision
     void createCoin(); // Slot to create a coin

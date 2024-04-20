@@ -1,5 +1,6 @@
 #include "player.h"
 #include "boxbrick.h"
+#include "brokenbrick.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 
@@ -37,7 +38,6 @@ void Player::keyPressEvent(QKeyEvent *event){
 }
 
 void Player::jumpStep() {
-    // 更新位置
     setPos(x(), y() + velocity);
     jumpTimer->start(20);
     velocity += 1; // 模拟重力影响
@@ -74,7 +74,6 @@ void Player::jumpStep() {
                     }
                 });
                 fallTimer->start(20); // 每 20 毫秒更新位置
-
                 break;
             }
 
@@ -97,6 +96,33 @@ void Player::jumpStep() {
                 }
             }
         }
+        
+        // check whether the player collided with BrokenBrick
+        if (typeid(*(colliding_items[i])) == typeid(BrokenBrick)) {
+            BrokenBrick *brokenbrick = dynamic_cast<BrokenBrick *>(colliding_items[i]);
+
+            // Check if hit from the bottom
+            if (velocity < 0 && y() > brokenbrick->y()) {
+                brokenbrick->breakBrick();
+                break;
+            }
+
+            if (velocity > 0 && y() + pixmap().height() < brokenbrick->y() + brokenbrick->pixmap().height()) {
+                setPos(x(), brokenbrick->y() - pixmap().height());
+                velocity = 0;
+                isJumping = false;
+                jumpTimer->stop();
+                break;
+            }
+
+            if (x() < brokenbrick->x() + brokenbrick->pixmap().width() && x() + pixmap().width() > brokenbrick->x()) {
+                if (x() < brokenbrick->x()) {
+                    setPos(brokenbrick->x() - pixmap().width(), y());
+                } else {
+                    setPos(brokenbrick->x() + brokenbrick->pixmap().width(), y());
+                }
+            }            
+        }
     }
 
     // 检查是否完成跳跃（是否回到了初始高度或更低）
@@ -105,6 +131,8 @@ void Player::jumpStep() {
         setPos(x(), 450); // 重置到地面
         isJumping = false; // 结束跳跃
         velocity = 0; // 重置速度
+            
+        }
     }
 }
 

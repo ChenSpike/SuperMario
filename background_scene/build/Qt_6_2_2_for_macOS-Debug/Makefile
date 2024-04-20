@@ -52,17 +52,23 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../floorbrickitem.cpp \
+SOURCES       = ../../boxbrick.cpp \
+		../../brokenbrick.cpp \
+		../../floorbrick.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../player.cpp qrc_background_scene_resource.cpp \
+		moc_brokenbrick.cpp \
 		moc_mainwindow.cpp \
 		moc_player.cpp
-OBJECTS       = floorbrickitem.o \
+OBJECTS       = boxbrick.o \
+		brokenbrick.o \
+		floorbrick.o \
 		main.o \
 		mainwindow.o \
 		player.o \
 		qrc_background_scene_resource.o \
+		moc_brokenbrick.o \
 		moc_mainwindow.o \
 		moc_player.o
 DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/spec_pre.prf \
@@ -315,10 +321,15 @@ DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/f
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/exceptions.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/yacc.prf \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/features/lex.prf \
-		../../../../background_scene.pro ../../floorbrick.h \
+		../../../../background_scene.pro ../../boxbrick.h \
+		../../brokenbrick.h \
+		../../floorbrick.h \
 		../../game.h \
 		../../mainwindow.h \
-		../../player.h ../../floorbrickitem.cpp \
+		../../player.h \
+		../../stonebrick.h ../../boxbrick.cpp \
+		../../brokenbrick.cpp \
+		../../floorbrick.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../player.cpp
@@ -887,8 +898,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../background_scene_resource.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../floorbrick.h ../../game.h ../../mainwindow.h ../../player.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../floorbrickitem.cpp ../../main.cpp ../../mainwindow.cpp ../../player.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../boxbrick.h ../../brokenbrick.h ../../floorbrick.h ../../game.h ../../mainwindow.h ../../player.h ../../stonebrick.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../boxbrick.cpp ../../brokenbrick.cpp ../../floorbrick.cpp ../../main.cpp ../../mainwindow.cpp ../../player.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -934,18 +945,29 @@ qrc_background_scene_resource.cpp: ../../background_scene_resource.qrc \
 		../../dataset/s_mario_stand_R.png \
 		../../dataset/box\ brick.png \
 		../../dataset/s_mario_jump2_L.png \
+		../../dataset/start_btn.png \
 		../../dataset/floor\ brick.png \
 		../../dataset/normal\ brick.png \
 		../../dataset/s_mario_stand_L.png \
 		../../dataset/s_mario_run2_R.png \
 		../../dataset/s_mario_jump2_R.png \
 		../../dataset/stone\ brick.png \
-		../../dataset/s_mario_run2_L.png
+		../../dataset/s_mario_run2_L.png \
+		../../dataset/start_screen.png
 	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/rcc -name background_scene_resource ../../background_scene_resource.qrc -o qrc_background_scene_resource.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_player.cpp
+compiler_moc_header_make_all: moc_brokenbrick.cpp moc_mainwindow.cpp moc_player.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_player.cpp
+	-$(DEL_FILE) moc_brokenbrick.cpp moc_mainwindow.cpp moc_player.cpp
+moc_brokenbrick.cpp: ../../brokenbrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc
+	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=15 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang -I/Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib ../../brokenbrick.h -o moc_brokenbrick.cpp
+
 moc_mainwindow.cpp: ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -986,12 +1008,32 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-floorbrickitem.o: ../../floorbrickitem.cpp ../../floorbrick.h \
+boxbrick.o: ../../boxbrick.cpp ../../boxbrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		../../stonebrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boxbrick.o ../../boxbrick.cpp
+
+brokenbrick.o: ../../brokenbrick.cpp ../../brokenbrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o brokenbrick.o ../../brokenbrick.cpp
+
+floorbrick.o: ../../floorbrick.cpp ../../floorbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o floorbrickitem.o ../../floorbrickitem.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o floorbrick.o ../../floorbrick.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -1001,6 +1043,10 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../stonebrick.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
+		../../boxbrick.h \
 		../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
@@ -1012,9 +1058,14 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../brokenbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QFont \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qfont.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QBrush \
@@ -1037,6 +1088,7 @@ player.o: ../../player.cpp ../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../brokenbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QKeyEvent \
@@ -1045,6 +1097,9 @@ player.o: ../../player.cpp ../../player.h \
 
 qrc_background_scene_resource.o: qrc_background_scene_resource.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_background_scene_resource.o qrc_background_scene_resource.cpp
+
+moc_brokenbrick.o: moc_brokenbrick.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_brokenbrick.o moc_brokenbrick.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
