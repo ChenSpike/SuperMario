@@ -7,7 +7,7 @@ BrokenBrick::BrokenBrick(const QPixmap& pixmap){
 void BrokenBrick::CreateBrokenBricks(QGraphicsScene *scene){
     QPixmap BrokenBrickImage(":/new/dataset/dataset/broken brick.png");
     BrokenBrick *brokenbrick1 = new BrokenBrick(BrokenBrickImage);
-    brokenbrick1 -> setPos(350,450);
+    brokenbrick1 -> setPos(350,400);
     scene ->addItem(brokenbrick1);
 }
 

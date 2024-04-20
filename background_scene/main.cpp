@@ -16,6 +16,7 @@
 #include <QFont>
 #include <QBrush>
 #include <QImage>
+#include <QLabel>
 
 int main(int argc, char *argv[])
 {
@@ -24,12 +25,23 @@ int main(int argc, char *argv[])
     //create start window
     QDialog start;
     start.setWindowTitle("Start the Game");
+    //Add Start Screen Image
+    QPixmap startscreenimage(":/new/dataset/dataset/start_screen.png");
+    QLabel startlabel(&start);
+    startlabel.setPixmap(startscreenimage);
+    startlabel.setGeometry(0,0,startscreenimage.width(),startscreenimage.height());
+
     //push button to start the game
-    QPushButton startbutton("Start Game", &start);
-    startbutton.setGeometry(50,50,200,50);
-    //connect button click signal to start the game
+    QPushButton startbutton("", &start);
+    QPixmap startbuttonimage(":/new/dataset/dataset/start_btn.png");
+    startbutton.setIcon(QIcon(startbuttonimage));
+    startbutton.setIconSize(startbuttonimage.size());//icon 和 screen的照片設置方法不一樣
+    startbutton.setGeometry(435,455,startbuttonimage.width(),startbuttonimage.height());
+    //設置start button的觸發方式是用鼠標click
     QObject::connect(&startbutton, &QPushButton::clicked, [&](){
+    //觸發完click後，關閉start screen
     start.close();
+
     //create a scene
     QGraphicsScene *scene = new QGraphicsScene();
 

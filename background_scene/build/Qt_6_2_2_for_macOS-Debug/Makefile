@@ -945,13 +945,15 @@ qrc_background_scene_resource.cpp: ../../background_scene_resource.qrc \
 		../../dataset/s_mario_stand_R.png \
 		../../dataset/box\ brick.png \
 		../../dataset/s_mario_jump2_L.png \
+		../../dataset/start_btn.png \
 		../../dataset/floor\ brick.png \
 		../../dataset/normal\ brick.png \
 		../../dataset/s_mario_stand_L.png \
 		../../dataset/s_mario_run2_R.png \
 		../../dataset/s_mario_jump2_R.png \
 		../../dataset/stone\ brick.png \
-		../../dataset/s_mario_run2_L.png
+		../../dataset/s_mario_run2_L.png \
+		../../dataset/start_screen.png
 	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/rcc -name background_scene_resource ../../background_scene_resource.qrc -o qrc_background_scene_resource.cpp
 
 compiler_moc_header_make_all: moc_brokenbrick.cpp moc_mainwindow.cpp moc_player.cpp
@@ -1021,7 +1023,9 @@ brokenbrick.o: ../../brokenbrick.cpp ../../brokenbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o brokenbrick.o ../../brokenbrick.cpp
 
 floorbrick.o: ../../floorbrick.cpp ../../floorbrick.h \
@@ -1058,6 +1062,10 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QDialog \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QFont \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qfont.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QBrush \
@@ -1080,6 +1088,7 @@ player.o: ../../player.cpp ../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../brokenbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QKeyEvent \
