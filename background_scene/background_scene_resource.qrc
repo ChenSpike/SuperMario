@@ -20,5 +20,6 @@
         <file>dataset/s_mario_jump2_L.png</file>
         <file>dataset/s_mario_jump1_R.png</file>
         <file>dataset/s_mario_jump1_L.png</file>
+        <file>dataset/coin.png</file>
     </qresource>
 </RCC>

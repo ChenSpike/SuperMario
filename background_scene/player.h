@@ -11,6 +11,8 @@ class Player:public QObject, public QGraphicsPixmapItem{
 public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
+signals:
+    void collidedWithBoxBrick(); // a signal of collision with Box Brick
 public slots:
     void jumpStep();
 private:
@@ -18,6 +20,7 @@ private:
     int velocity;
     int maxHeight = 100; // 跳躍高度
     bool isJumping = false; // 跳躍狀態
+
 };
 
 #endif // PLAYER_H

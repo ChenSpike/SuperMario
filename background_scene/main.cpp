@@ -2,6 +2,8 @@
 #include "floorbrick.h"
 #include "player.h"
 #include "game.h"
+#include "boxbrick.h"
+#include "coin.h"
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -15,14 +17,14 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //create a scene
+    // create a scene
     QGraphicsScene *scene = new QGraphicsScene();
 
-    //load background image
+    // load background image
     QPixmap pixmap(":/new/dataset/dataset/background_7000pixel.png");
     //"":insert image's path
 
-    //add the image to the scene
+    // add the image to the scene
     QGraphicsPixmapItem* background = scene ->addPixmap(pixmap);
     background -> setPos(0,0);
 
@@ -34,13 +36,21 @@ int main(int argc, char *argv[])
     mario->setFocus();
     scene ->addItem(mario);
 
-    //add floor brick item
+    // add floor brick item
     FloorBrick::CreateFloorBricks(scene);
 
-    //visualize (view)
+    // Create a BoxBrick
+    BoxBrick *boxBrick = new BoxBrick(scene);
+    boxBrick->setPos(500, 350); // Set position of the box brick
+    scene->addItem(boxBrick);
+
+    // connect collision handling signal for player
+    QObject::connect(mario, &Player::collidedWithBoxBrick, boxBrick, &BoxBrick::handleCollision);
+
+    // visualize (view)
     QGraphicsView *view = new QGraphicsView(scene);
 
-    //set the view size
+    // set the view size
     view -> setFixedSize(1400,620);
     view -> show();
 
