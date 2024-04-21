@@ -4,47 +4,31 @@
 #include <QPixmap>
 #include <QTimer>
 
-BoxBrick::BoxBrick() : isBoxBrick(true), m_signalConnected(false){
+BoxBrick::BoxBrick() : isBoxBrick(true){
     // Set the pixmap to box brick image
-    QPixmap pixmap(":/new/dataset/dataset/box brick.png");
-    setPixmap(pixmap);
-
-    // connect to collision handling function
-    connect(this, SIGNAL(collided()), this, SLOT(handleCollision()));
+    setPixmap(QPixmap(":/new/dataset/dataset/box brick.png"));
 }
 
-/*
-BoxBrick::BoxBrick(QGraphicsScene *scene) : scene(scene), isBoxBrick(true){
-    // Set the pixmap to box brick image
-    QPixmap pixmap(":/new/dataset/dataset/box brick.png");
-    setPixmap(pixmap);
-
-    // connect to collision handling funciton
-    connect(this, SIGNAL(collided()), this, SLOT(handleCollision()));
-}*/
-
-BoxBrick::BoxBrick(const QPixmap& pixmap){
-    setPixmap(pixmap);
-}
-
-void BoxBrick::CreateBoxBricks(QGraphicsScene *scene){
-    //QPixmap BoxBrickImage(":/new/dataset/dataset/box brick.png");
-    for (int i = 0; i < 140;i++){
-        if (i == 8||i==15||i==35||i==65||i==70||i==90){
-            //BoxBrick *boxbrick = new BoxBrick(BoxBrickImage);
-            BoxBrick *boxbrick = new BoxBrick();
-            boxbrick -> setPos(i*50, 400);
-            scene -> addItem(boxbrick);
-        }
-        continue;
+void BoxBrick::CreateBoxBricks(QGraphicsScene* scene){
+    // create box bricks at different position
+    int c=0;
+    for(int i=0; i<6; i++){
+        if(i==0) c=8;
+        if(i==1) c=15;
+        if(i==2) c=35;
+        if(i==3) c=65;
+        if(i==4) c=70;
+        if(i==5) c=90;
+        BoxBrick *boxBrick = new BoxBrick();
+        boxBrick -> setPos(c*50, 400);
+        scene -> addItem(boxBrick);
     }
 }
 
 void BoxBrick::handleCollision(){
     // Change the pixmap to stone brick after collision
-    if (isBoxBrick && !isSignalConnected()) {
-        QPixmap pixmap(":/new/dataset/dataset/stone brick.png");
-        setPixmap(pixmap);
+    if (isBoxBrick) {
+        setPixmap(QPixmap(":/new/dataset/dataset/stone brick.png"));
         isBoxBrick = false; // set as stone brick state
         createCoin(); // create a coin
 
@@ -59,12 +43,4 @@ void BoxBrick::createCoin(){
 
     // Start a timer to remove the coin after 0.5 seconds
     QTimer::singleShot(500, coin, SLOT(deleteLater()));
-}
-
-bool BoxBrick::isSignalConnected() const {
-    return m_signalConnected;
-}
-
-void BoxBrick::setSignalConnected(bool connected) {
-    m_signalConnected = connected;
 }

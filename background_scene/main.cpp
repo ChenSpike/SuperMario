@@ -19,6 +19,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QLabel>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -64,38 +65,11 @@ int main(int argc, char *argv[])
         scene ->addItem(mario);
         ///////////////////////////////////////////////////////////
 
-        // create floor bricks
-        FloorBrick::CreateFloorBricks(scene);
-
-        //////////////////// create box bricks ////////////////////
-    //    BoxBrick *boxBrick = new BoxBrick(scene);
-    //    boxBrick->setPos(500, 350); // Set position of the box brick
-    //    scene->addItem(boxBrick);
-
-        // connect collision handling signal for player
-    //    QObject::connect(mario, &Player::collidedWithBoxBrick, boxBrick, &BoxBrick::handleCollision);
-
-        //add box brick item (要再加collide())
-        BoxBrick::CreateBoxBricks(scene);
-        // 遍历场景中的所有项目
-        for (auto item : scene->items()) {
-            // 检查是否是 BoxBrick 类型的项目
-            if (auto boxBrick = dynamic_cast<BoxBrick*>(item)) {
-                // 检查是否已经连接过信号
-                if (!boxBrick->isSignalConnected()) {
-                    // 连接 mario 的 collidedWithBoxBrick 信号到 box brick 的 handleCollision 槽函数
-                    QObject::connect(mario, &Player::collidedWithBoxBrick, boxBrick, &BoxBrick::handleCollision);
-                    // 标记为已连接信号
-                    boxBrick->setSignalConnected(true);
-                }
-            }
-        }
-        //QObject::connect(mario, &Player::collidedWithBoxBrick, BoxBrick::handleCollision);
-
-        //////////////////////////////////////////////////////////
-
-        //add broken brick item
-        BrokenBrick::CreateBrokenBricks(scene);
+        //////////////////// create bricks ////////////////////
+        FloorBrick::CreateFloorBricks(scene); // floor bricks
+        BoxBrick::CreateBoxBricks(scene); // box bricks
+        BrokenBrick::CreateBrokenBricks(scene); // broken bricks
+        ///////////////////////////////////////////////////////
 
         // visualize (view)
         QGraphicsView *view = new QGraphicsView(scene);
