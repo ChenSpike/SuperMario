@@ -130,9 +130,7 @@ void Player::jumpStep() {
         jumpTimer->stop();
         setPos(x(), 450); // 重置到地面
         isJumping = false; // 结束跳跃
-        velocity = 0; // 重置速度
-            
-        }
+        velocity = 0; // 重置速度            
     }
 }
 

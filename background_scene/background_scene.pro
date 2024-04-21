@@ -10,9 +10,8 @@ CONFIG += c++11
 
 SOURCES += \
     boxbrick.cpp \
-    coin.cpp \
-    floorbrickitem.cpp \
     brokenbrick.cpp \
+    coin.cpp \
     floorbrick.cpp \
     main.cpp \
     mainwindow.cpp \

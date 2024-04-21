@@ -41,52 +41,61 @@ int main(int argc, char *argv[])
     startbutton.setGeometry(435,455,startbuttonimage.width(),startbuttonimage.height());
     //設置start button的觸發方式是用鼠標click
     QObject::connect(&startbutton, &QPushButton::clicked, [&](){
-    //觸發完click後，關閉start screen
-    start.close();
+        //觸發完click後，關閉start screen
+        start.close();
 
-    //create a scene
-    QGraphicsScene *scene = new QGraphicsScene();
+        //create a scene
+        QGraphicsScene *scene = new QGraphicsScene();
 
-    // load background image
-    QPixmap pixmap(":/new/dataset/dataset/background_7000pixel.png");
-    //"":insert image's path
+        // load background image
+        QPixmap pixmap(":/new/dataset/dataset/background_7000pixel.png");
+        //"":insert image's path
 
-    // add the image to the scene
-    QGraphicsPixmapItem* background = scene ->addPixmap(pixmap);
-    background -> setPos(0,0);
+        // add the image to the scene
+        QGraphicsPixmapItem* background = scene ->addPixmap(pixmap);
+        background -> setPos(0,0);
 
-    // create the player
-    Player *mario = new Player();
-    mario->setPos(200,450); // TODO generalize to always be in the middle bottom of screen
-    // make the player focusable and set it to be the current focus
-    mario->setFlag(QGraphicsItem::ItemIsFocusable);
-    mario->setFocus();
-    scene ->addItem(mario);
+        //////////////////// create the player ////////////////////
+        Player *mario = new Player();
+        mario->setPos(200,450); // TODO generalize to always be in the middle bottom of screen
+        // make the player focusable and set it to be the current focus
+        mario->setFlag(QGraphicsItem::ItemIsFocusable);
+        mario->setFocus();
+        scene ->addItem(mario);
+        ///////////////////////////////////////////////////////////
 
-    // add floor brick item
-    FloorBrick::CreateFloorBricks(scene);
+        // create floor bricks
+        FloorBrick::CreateFloorBricks(scene);
 
-    // Create a BoxBrick
-    BoxBrick *boxBrick = new BoxBrick(scene);
-    boxBrick->setPos(500, 350); // Set position of the box brick
-    scene->addItem(boxBrick);
+        //////////////////// create box bricks ////////////////////
+    //    BoxBrick *boxBrick = new BoxBrick(scene);
+    //    boxBrick->setPos(500, 350); // Set position of the box brick
+    //    scene->addItem(boxBrick);
 
-    // connect collision handling signal for player
-    QObject::connect(mario, &Player::collidedWithBoxBrick, boxBrick, &BoxBrick::handleCollision);
+        // connect collision handling signal for player
+    //    QObject::connect(mario, &Player::collidedWithBoxBrick, boxBrick, &BoxBrick::handleCollision);
 
-    // visualize (view)
-    //add box brick item (要再加collide())
-    BoxBrick::CreateBoxBricks(scene);
+        //add box brick item (要再加collide())
+        BoxBrick::CreateBoxBricks(scene);
+        // 连接 mario 的 collidedWithBoxBrick 信号到 box brick 的 handleCollision 槽函数
+        for (auto boxBrick : scene->items()) {
+            if (dynamic_cast<BoxBrick*>(boxBrick)) {
+                QObject::connect(mario, &Player::collidedWithBoxBrick, dynamic_cast<BoxBrick*>(boxBrick), &BoxBrick::handleCollision);
+            }
+        }
+        //QObject::connect(mario, &Player::collidedWithBoxBrick, BoxBrick::handleCollision);
 
-    //add broken brick item
-    BrokenBrick::CreateBrokenBricks(scene);
+        //////////////////////////////////////////////////////////
 
-    //visualize (view)
-    QGraphicsView *view = new QGraphicsView(scene);
+        //add broken brick item
+        BrokenBrick::CreateBrokenBricks(scene);
 
-    // set the view size
-    view -> setFixedSize(1400,620);
-    view -> show();
+        // visualize (view)
+        QGraphicsView *view = new QGraphicsView(scene);
+
+        // set the view size
+        view -> setFixedSize(1400,620);
+        view -> show();
     });
 
     start.exec(); //show the start dialog
