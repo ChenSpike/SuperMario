@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include <QTimer>
 
-BoxBrick::BoxBrick() : isBoxBrick(true){
+BoxBrick::BoxBrick() : isBoxBrick(true), m_signalConnected(false){
     // Set the pixmap to box brick image
     QPixmap pixmap(":/new/dataset/dataset/box brick.png");
     setPixmap(pixmap);
@@ -42,11 +42,12 @@ void BoxBrick::CreateBoxBricks(QGraphicsScene *scene){
 
 void BoxBrick::handleCollision(){
     // Change the pixmap to stone brick after collision
-    if (isBoxBrick) {
+    if (isBoxBrick && !isSignalConnected()) {
         QPixmap pixmap(":/new/dataset/dataset/stone brick.png");
         setPixmap(pixmap);
         isBoxBrick = false; // set as stone brick state
         createCoin(); // create a coin
+
     }
 }
 
@@ -58,4 +59,12 @@ void BoxBrick::createCoin(){
 
     // Start a timer to remove the coin after 0.5 seconds
     QTimer::singleShot(500, coin, SLOT(deleteLater()));
+}
+
+bool BoxBrick::isSignalConnected() const {
+    return m_signalConnected;
+}
+
+void BoxBrick::setSignalConnected(bool connected) {
+    m_signalConnected = connected;
 }

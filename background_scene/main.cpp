@@ -77,10 +77,17 @@ int main(int argc, char *argv[])
 
         //add box brick item (要再加collide())
         BoxBrick::CreateBoxBricks(scene);
-        // 连接 mario 的 collidedWithBoxBrick 信号到 box brick 的 handleCollision 槽函数
-        for (auto boxBrick : scene->items()) {
-            if (dynamic_cast<BoxBrick*>(boxBrick)) {
-                QObject::connect(mario, &Player::collidedWithBoxBrick, dynamic_cast<BoxBrick*>(boxBrick), &BoxBrick::handleCollision);
+        // 遍历场景中的所有项目
+        for (auto item : scene->items()) {
+            // 检查是否是 BoxBrick 类型的项目
+            if (auto boxBrick = dynamic_cast<BoxBrick*>(item)) {
+                // 检查是否已经连接过信号
+                if (!boxBrick->isSignalConnected()) {
+                    // 连接 mario 的 collidedWithBoxBrick 信号到 box brick 的 handleCollision 槽函数
+                    QObject::connect(mario, &Player::collidedWithBoxBrick, boxBrick, &BoxBrick::handleCollision);
+                    // 标记为已连接信号
+                    boxBrick->setSignalConnected(true);
+                }
             }
         }
         //QObject::connect(mario, &Player::collidedWithBoxBrick, BoxBrick::handleCollision);
