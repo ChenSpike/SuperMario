@@ -1,11 +1,13 @@
 debug/boxbrick.o
+debug/brokenbrick.o
 debug/coin.o
-debug/floorbrickitem.o
+debug/floorbrick.o
 debug/main.o
 debug/mainwindow.o
 debug/player.o
 debug/qrc_background_scene_resource.o
 debug/moc_boxbrick.o
 debug/moc_coin.o
+debug/moc_brokenbrick.o
 debug/moc_mainwindow.o
 debug/moc_player.o

@@ -3,7 +3,7 @@
 #include "brokenbrick.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
-
+#include <QList>
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 
@@ -49,15 +49,16 @@ void Player::jumpStep() {
         // check whether the player collided with BoxBrick
         if(typeid(*(colliding_items[i])) == typeid(BoxBrick)){
             BoxBrick *brick = dynamic_cast<BoxBrick *>(colliding_items[i]);
-            QRectF brickRect = brick->boundingRect();
 
             // check if hit from the bottom
-            if(velocity < 0 && y() + pixmap().height() > brick->y() + brickRect.height()){
+            if(velocity < 0 && pos().y() + pixmap().height() > brick->y() + brick->pixmap().height()){
+                // stop the jumpTimer and set the starting point for falling down
                 velocity = 0;
                 setPos(x(), y());
                 isJumping = false;
                 jumpTimer->stop();
-                emit collidedWithBoxBrick(); // emit collision signal
+
+                brick->handleCollision(); // change to the block brick
 
                 // mario fall to ground
                 QTimer *fallTimer = new QTimer(this);
@@ -78,7 +79,7 @@ void Player::jumpStep() {
             }
 
             // Check if landing on top of the brick
-            if (velocity > 0 && y() + pixmap().height() < brick->y() + brick->pixmap().height()) {
+            if (velocity > 0 && pos().y() + pixmap().height() < brick->y() + brick->pixmap().height()) {
                 setPos(x(), brick->y() - pixmap().height());
                 velocity = 0;
                 isJumping = false;
@@ -130,9 +131,7 @@ void Player::jumpStep() {
         jumpTimer->stop();
         setPos(x(), 450); // 重置到地面
         isJumping = false; // 结束跳跃
-        velocity = 0; // 重置速度
-            
-        }
+        velocity = 0; // 重置速度            
     }
 }
 
