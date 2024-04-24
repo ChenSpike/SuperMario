@@ -10,6 +10,18 @@ Coin::Coin() {
     setPixmap(pixmap);
 }
 
+void Coin::CreateCoins(QGraphicsScene* scene){
+    // create coins at different position
+    QVector<Coin*> vCoin;
+    int position[] = {7, 8, 9, 10, 11, 12};
+    for(int i=0; i<6; i++){
+        Coin* newCoin = new Coin();
+        newCoin -> setPos(position[i] * 50, 350);
+        scene -> addItem(newCoin);
+        vCoin.append(newCoin);
+    }
+}
+
 /*
 Coin* Coin::getInstance()
 {

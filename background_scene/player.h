@@ -12,6 +12,8 @@ public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
     void jumpStep();
+signals:
+    void increaseScore();
 private:
     QTimer* jumpTimer;
     int velocity;

@@ -1,9 +1,13 @@
 #include "player.h"
 #include "boxbrick.h"
 #include "brokenbrick.h"
+#include "coin.h"
+#include "score.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
+
+//extern Score * score;
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 
@@ -48,17 +52,17 @@ void Player::jumpStep() {
 
         // check whether the player collided with BoxBrick
         if(typeid(*(colliding_items[i])) == typeid(BoxBrick)){
-            BoxBrick *brick = dynamic_cast<BoxBrick *>(colliding_items[i]);
+            BoxBrick *boxbrick = dynamic_cast<BoxBrick *>(colliding_items[i]);
 
             // check if hit from the bottom
-            if(velocity < 0 && pos().y() + pixmap().height() > brick->y() + brick->pixmap().height()){
+            if(velocity < 0 && pos().y() + pixmap().height() > boxbrick->y() + boxbrick->pixmap().height()){
                 // stop the jumpTimer and set the starting point for falling down
                 velocity = 0;
                 setPos(x(), y());
                 isJumping = false;
                 jumpTimer->stop();
 
-                brick->handleCollision(); // change to the block brick
+                boxbrick->handleCollision(); // change to the block brick
 
                 // mario fall to ground
                 QTimer *fallTimer = new QTimer(this);
@@ -79,8 +83,8 @@ void Player::jumpStep() {
             }
 
             // Check if landing on top of the brick
-            if (velocity > 0 && pos().y() + pixmap().height() < brick->y() + brick->pixmap().height()) {
-                setPos(x(), brick->y() - pixmap().height());
+            if (velocity > 0 && pos().y() + pixmap().height() < boxbrick->y() + boxbrick->pixmap().height()) {
+                setPos(x(), boxbrick->y() - pixmap().height());
                 velocity = 0;
                 isJumping = false;
                 jumpTimer->stop();
@@ -88,12 +92,12 @@ void Player::jumpStep() {
             }
 
             // Check for side collisions
-            if (x() < brick->x() + brick->pixmap().width() && x() + pixmap().width() > brick->x()) {
-                if (x() < brick->x()) {
-                    setPos(brick->x() - pixmap().width(), y());
+            if (x() < boxbrick->x() + boxbrick->pixmap().width() && x() + pixmap().width() > boxbrick->x()) {
+                if (x() < boxbrick->x()) {
+                    setPos(boxbrick->x() - pixmap().width(), y());
                 }
                 else {
-                    setPos(brick->x() + brick->pixmap().width(), y());
+                    setPos(boxbrick->x() + boxbrick->pixmap().width(), y());
                 }
             }
         }
@@ -124,10 +128,18 @@ void Player::jumpStep() {
                 }
             }            
         }
+
+        // collided with coin
+        if (typeid(*(colliding_items[i])) == typeid(Coin)) {
+            Coin *coin = dynamic_cast<Coin*>(colliding_items[i]);
+            scene()->removeItem(coin); // delete the coin
+            delete coin; // release memory
+            Score::getInstance()->increase(); // score + 1
+        }
     }
 
     // 检查是否完成跳跃（是否回到了初始高度或更低）
-    if (pos().y() > 450) {
+    if (y() > 450) {
         jumpTimer->stop();
         setPos(x(), 450); // 重置到地面
         isJumping = false; // 结束跳跃

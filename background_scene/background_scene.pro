@@ -15,7 +15,8 @@ SOURCES += \
     floorbrick.cpp \
     main.cpp \
     mainwindow.cpp \
-    player.cpp
+    player.cpp \
+    score.cpp
 
 HEADERS += \
     boxbrick.h \
@@ -25,6 +26,7 @@ HEADERS += \
     game.h \
     mainwindow.h \
     player.h \
+    score.h \
     stonebrick.h
 
 FORMS += \
