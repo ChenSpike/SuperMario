@@ -2,24 +2,29 @@
 #include <QFont>
 #include <QGraphicsView>
 
-int Score::currentScore = 0;
+Score* Score::instance = nullptr;
 
-Score::Score(QGraphicsItem *parent) : QGraphicsTextItem(parent){
-    setPlainText(QString("Score: ") + QString::number(currentScore)); // Score: 0
+Score::Score(QGraphicsItem *parent) : QGraphicsTextItem(parent), score(0){
+    setPlainText(QString("Score: ") + QString::number(score)); // Score: 0
     setDefaultTextColor(Qt::white);
     setFont(QFont("times", 16));
+    instance = this;
+}
+
+Score* Score::getInstance() {
+    if (!instance)
+        instance = new Score();
+    return instance;
 }
 
 void Score::increase(){
-    // increase the score and show it
-    currentScore++;
-    setPlainText(QString("Score: ") + QString::number(currentScore));
+    score++;
+    setPlainText(QString("Score: ") + QString::number(score));
 }
 
 
 int Score::getScore() const{
-    // return current score
-    return currentScore;
+    return score;
 }
 
 /*

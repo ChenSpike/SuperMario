@@ -36,8 +36,7 @@ void BoxBrick::createCoin(){
     Coin *coin = new Coin();
     scene() -> addItem(coin);
     coin->setPos(this->x(), this->y() - coin->boundingRect().height()); // Set position above the stone brick
-    //emit increaseScore();
-
+    Score::getInstance()->increase();  // Increase the score
 
     // Start a timer to remove the coin after 0.5 seconds
     QTimer::singleShot(500, coin, SLOT(deleteLater()));

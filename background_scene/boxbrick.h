@@ -10,8 +10,6 @@ public:
     BoxBrick();
     static void CreateBoxBricks(QGraphicsScene* scene);
     void handleCollision(); // handle collision
-signals:
-    void increaseScore(); // A signal to increase score
 private:
     void createCoin(); // create a coin
     bool isBoxBrick; // An indicator to determine whether it is a box brick or not.

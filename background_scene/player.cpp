@@ -132,10 +132,9 @@ void Player::jumpStep() {
         // collided with coin
         if (typeid(*(colliding_items[i])) == typeid(Coin)) {
             Coin *coin = dynamic_cast<Coin*>(colliding_items[i]);
-            scene()->removeItem(coin); // 移除coin
-            delete coin; // 释放内存
-            //score->increase();
-            emit increaseScore(); // Emit a signal to score.cpp: score + 1
+            scene()->removeItem(coin); // delete the coin
+            delete coin; // release memory
+            Score::getInstance()->increase(); // score + 1
         }
     }
 

@@ -22,8 +22,6 @@
 #include <QLabel>
 #include <QDebug>
 
-//Score *score = new Score;
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -79,7 +77,6 @@ int main(int argc, char *argv[])
 
         // create the score
         Score *score = new Score;
-        QObject::connect(mario, &Player::increaseScore, score, &Score::increase);
         scene -> addItem(score);
 
         // visualize (view)
