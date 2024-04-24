@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "score.h"
 #include "floorbrick.h"
 #include "stonebrick.h"
 #include "boxbrick.h"
@@ -20,6 +21,8 @@
 #include <QImage>
 #include <QLabel>
 #include <QDebug>
+
+//Score *score = new Score;
 
 int main(int argc, char *argv[])
 {
@@ -70,6 +73,14 @@ int main(int argc, char *argv[])
         BoxBrick::CreateBoxBricks(scene); // box bricks
         BrokenBrick::CreateBrokenBricks(scene); // broken bricks
         ///////////////////////////////////////////////////////
+
+        // create coins
+        Coin::CreateCoins(scene);
+
+        // create the score
+        Score *score = new Score;
+        QObject::connect(mario, &Player::increaseScore, score, &Score::increase);
+        scene -> addItem(score);
 
         // visualize (view)
         QGraphicsView *view = new QGraphicsView(scene);
