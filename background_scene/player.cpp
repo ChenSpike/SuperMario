@@ -1,13 +1,12 @@
 #include "player.h"
 #include "boxbrick.h"
 #include "brokenbrick.h"
+#include "normalbrick.h"
 #include "coin.h"
 #include "score.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
-
-//extern Score * score;
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
 
@@ -127,6 +126,58 @@ void Player::jumpStep() {
                     setPos(brokenbrick->x() + brokenbrick->pixmap().width(), y());
                 }
             }            
+        }
+
+        // check whether the player collided with NormalBrick
+        if(typeid(*(colliding_items[i])) == typeid(NormalBrick)){
+            NormalBrick *normalbrick = dynamic_cast<NormalBrick *>(colliding_items[i]);
+
+            // check if hit from the bottom
+            if(velocity < 0 && pos().y() + pixmap().height() > normalbrick->y() + normalbrick->pixmap().height()){
+                // stop the jumpTimer and set the starting point for falling down
+                velocity = 0;
+                setPos(x(), y());
+                isJumping = false;
+                jumpTimer->stop();
+
+                normalbrick->handleCollision(); // change to the block brick
+
+                // mario fall to ground
+                QTimer *fallTimer = new QTimer(this);
+                // lambda 函数由 timeout 信號每 20 毫秒觸發，因為 start(20) 決定 timeout 的時間間隔為 20 毫秒
+                connect(fallTimer, &QTimer::timeout, [=]() {
+                    velocity += 1;
+                    if (y() <= 450) { // 检查是否达到地面
+                        setPos(x(), y() + velocity); // gradually drop to the ground
+                    }
+                    else {
+                        velocity = 0;
+                        fallTimer->stop(); // 停止落地动画
+                        delete fallTimer;
+                    }
+                });
+                fallTimer->start(20); // 每 20 毫秒更新位置
+                break;
+            }
+
+            // Check if landing on top of the brick
+            if (velocity > 0 && pos().y() + pixmap().height() < normalbrick->y() + normalbrick->pixmap().height()) {
+                setPos(x(), normalbrick->y() - pixmap().height());
+                velocity = 0;
+                isJumping = false;
+                jumpTimer->stop();
+                break;
+            }
+
+            // Check for side collisions
+            if (x() < normalbrick->x() + normalbrick->pixmap().width() && x() + pixmap().width() > normalbrick->x()) {
+                if (x() < normalbrick->x()) {
+                    setPos(normalbrick->x() - pixmap().width(), y());
+                }
+                else {
+                    setPos(normalbrick->x() + normalbrick->pixmap().width(), y());
+                }
+            }
         }
 
         // collided with coin

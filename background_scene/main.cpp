@@ -3,6 +3,7 @@
 #include "floorbrick.h"
 #include "stonebrick.h"
 #include "boxbrick.h"
+#include "normalbrick.h"
 #include "player.h"
 #include "game.h"
 #include "boxbrick.h"
@@ -70,6 +71,7 @@ int main(int argc, char *argv[])
         FloorBrick::CreateFloorBricks(scene); // floor bricks
         BoxBrick::CreateBoxBricks(scene); // box bricks
         BrokenBrick::CreateBrokenBricks(scene); // broken bricks
+        NormalBrick::CreateNormalBricks(scene); // normal bricks
         ///////////////////////////////////////////////////////
 
         // create coins
