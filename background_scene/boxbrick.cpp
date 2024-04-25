@@ -6,8 +6,11 @@
 #include <QTimer>
 
 BoxBrick::BoxBrick() : isBoxBrick(true){
-    // Set the pixmap to box brick image
+    // Set box brick image
     setPixmap(QPixmap(":/new/dataset/dataset/box brick.png"));
+    // connect coin timer to coinFly
+    coinTimer = new QTimer(this);
+    connect(coinTimer, &QTimer::timeout, this, &BoxBrick::coinFly);
 }
 
 void BoxBrick::CreateBoxBricks(QGraphicsScene* scene){
@@ -32,12 +35,24 @@ void BoxBrick::handleCollision(){
 }
 
 void BoxBrick::createCoin(){
-    // Create a coin at the position above the stone brick
-    Coin *coin = new Coin();
+    // Create a coin and increase the score
+    coin = new Coin();
     scene() -> addItem(coin);
     coin->setPos(this->x(), this->y() - coin->boundingRect().height()); // Set position above the stone brick
     Score::getInstance()->increase();  // Increase the score
 
-    // Start a timer to remove the coin after 0.5 seconds
-    QTimer::singleShot(500, coin, SLOT(deleteLater()));
+    // Start a timer for the coin to fly up and then disappear
+    coinTimer->start(20);
+}
+
+void BoxBrick::coinFly(){
+    if (coin) {
+        coin->setPos(coin->x(), coin->y() - 10); // coin goes up
+        if (coin->y() <= this->y() - 100) { // height limit: 100px
+            coinTimer->stop();
+            scene()->removeItem(coin);
+            delete coin;
+            coin = nullptr;
+        }
+    }
 }

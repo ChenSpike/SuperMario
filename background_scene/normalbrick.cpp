@@ -4,7 +4,9 @@
 
 NormalBrick::NormalBrick(bool withCoin) :
     coinCount(0), isNormalBrickWCoin(withCoin), initialY(0), isBouncing(false){
+    // Set normal brick image
     setPixmap(QPixmap(":/new/dataset/dataset/normal brick.png"));
+    // connect bounce timer and coin timer
     bounceTimer = new QTimer(this);
     coinTimer = new QTimer(this);
     connect(bounceTimer, &QTimer::timeout, this, &NormalBrick::bounce);
@@ -13,7 +15,7 @@ NormalBrick::NormalBrick(bool withCoin) :
 
 void NormalBrick::CreateNormalBricks(QGraphicsScene* scene){
     QVector<NormalBrick*> vNormalBrick;
-    int position[] = {10, 11}; // create normal bricks at different position
+    int position[] = {10, 11}; // create no-coin normal bricks at different position
     for(int i=0; i<2; i++){
         NormalBrick* noCoinNormalBrick = new NormalBrick();
         noCoinNormalBrick -> setPos(position[i] * 50, 400);
@@ -21,7 +23,7 @@ void NormalBrick::CreateNormalBricks(QGraphicsScene* scene){
         vNormalBrick.append(noCoinNormalBrick);
     }
     position[0] = 13;
-    position[1] = 14;// create normal bricks at different position
+    position[1] = 14; // create coin normal bricks at different position
     for(int i=0; i<2; i++){
         NormalBrick* coinNormalBrick = new NormalBrick(true);
         coinNormalBrick -> setPos(position[i] * 50, 400);
@@ -81,11 +83,10 @@ void NormalBrick::bounce() {
     }
 }
 
-
 void NormalBrick::coinFly(){
     if (coin) {
         coin->setPos(coin->x(), coin->y() - 10); // coin goes up
-        if (coin->y() <= initialY - 100) { // height limit: 100px
+        if (coin->y() <= this->y() - 100) { // height limit: 100px
             coinTimer->stop();
             scene()->removeItem(coin);
             delete coin;
