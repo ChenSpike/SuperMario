@@ -4,6 +4,7 @@
 #include "normalbrick.h"
 #include "coin.h"
 #include "score.h"
+#include "supermushroom.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
@@ -17,16 +18,29 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
     velocity = 0; // 初始速度
 }
 
+void Player::grow() {
+    if (!isBig) {
+        setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
+        isBig = true;
+    }
+}
+
 void Player::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Left){
-        setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
+        if(!isBig)
+            setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
+        if(isBig)
+            setPixmap(QPixmap(":/new/dataset/dataset/mario_L_run1.png"));
         setPos(x()-25, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
     }
     else if (event->key() == Qt::Key_Right){
-        setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
+        if(!isBig)
+            setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
+        if(isBig)
+            setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
         setPos(x()+25, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
@@ -34,7 +48,10 @@ void Player::keyPressEvent(QKeyEvent *event){
     }
     else if (event->key() == Qt::Key_Space && !isJumping) {
         isJumping = true;
-        velocity = -15;  // Adjust the initial jump velocity as needed
+        if(!isBig)
+            velocity = -15;  // Adjust the initial jump velocity as needed
+        if(isBig)
+            velocity = -20;  // Adjust the initial jump velocity as needed
         jumpTimer->start(20);
     }
 
@@ -68,7 +85,7 @@ void Player::jumpStep() {
                 // lambda 函数由 timeout 信號每 20 毫秒觸發，因為 start(20) 決定 timeout 的時間間隔為 20 毫秒
                 connect(fallTimer, &QTimer::timeout, [=]() {
                     velocity += 1;
-                    if (y() <= 450) { // 检查是否达到地面
+                    if (y() <= 470) { // 检查是否達到地面
                         setPos(x(), y() + velocity); // gradually drop to the ground
                     }
                     else {
@@ -187,14 +204,22 @@ void Player::jumpStep() {
             delete coin; // release memory
             Score::getInstance()->increase(); // score + 1
         }
+        if(typeid(*(colliding_items[i])) == typeid(SuperMushroom)) {
+            grow();
+        }
+
+
+
+
+
     }
 
     // 检查是否完成跳跃（是否回到了初始高度或更低）
-    if (y() > 450) {
+    if (pos().y() > 470) {
         jumpTimer->stop();
-        setPos(x(), 450); // 重置到地面
+        setPos(x(), 470); // 重置到地面
         isJumping = false; // 结束跳跃
-        velocity = 0; // 重置速度            
+        velocity = 0; // 重置速度
     }
 }
 

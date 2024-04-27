@@ -11,25 +11,48 @@ CONFIG += c++11
 SOURCES += \
     boxbrick.cpp \
     brokenbrick.cpp \
+<<<<<<< HEAD
+=======
+    castle.cpp \
+>>>>>>> 5ecb130 (whole scene)
     coin.cpp \
     floorbrick.cpp \
     main.cpp \
     mainwindow.cpp \
     normalbrick.cpp \
+<<<<<<< HEAD
     player.cpp \
     score.cpp
 
 HEADERS += \
     boxbrick.h \
+=======
+    normalbrickwcoin.cpp \
+    player.cpp \
+    supermushroom.cpp \
+    waterpipe.cpp
+
+HEADERS += \
+    boxbrick.h \
+    castle.h \
+>>>>>>> 5ecb130 (whole scene)
     coin.h \
     brokenbrick.h \
     floorbrick.h \
     game.h \
     mainwindow.h \
     normalbrick.h \
+<<<<<<< HEAD
     player.h \
     score.h \
     stonebrick.h
+=======
+    normalbrickwcoin.h \
+    player.h \
+    stonebrick.h \
+    supermushroom.h \
+    waterpipe.h
+>>>>>>> 5ecb130 (whole scene)
 
 FORMS += \
     mainwindow.ui

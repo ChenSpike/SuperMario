@@ -23,5 +23,6 @@
         <file>dataset/coin.png</file>
         <file>dataset/start_btn.png</file>
         <file>dataset/start_screen.png</file>
+        <file>castle.png</file>
     </qresource>
 </RCC>

@@ -1,13 +1,15 @@
-#include "mainwindow.h"
+#include "minwindow.h"
 #include "score.h"
 #include "floorbrick.h"
 #include "stonebrick.h"
-#include "boxbrick.h"
 #include "normalbrick.h"
-#include "player.h"
 #include "game.h"
 #include "boxbrick.h"
 #include "coin.h"
+#include "normalbrickwcoin.h"
+#include "waterpipe.h"
+#include "castle.h"
+#include "player.h"
 #include "brokenbrick.h"
 #include <QApplication>
 #include <QGraphicsScene>
@@ -26,7 +28,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+     //////////////////// create start screen ////////////////////
     //create start window
     QDialog start;
     start.setWindowTitle("Start the Game");
@@ -40,13 +42,15 @@ int main(int argc, char *argv[])
     QPushButton startbutton("", &start);
     QPixmap startbuttonimage(":/new/dataset/dataset/start_btn.png");
     startbutton.setIcon(QIcon(startbuttonimage));
-    startbutton.setIconSize(startbuttonimage.size());//icon 和 screen的照片設置方法不一樣
+    startbutton.setIconSize(startbuttonimage.size()); //icon 和 screen的照片設置方法不一樣
     startbutton.setGeometry(435,455,startbuttonimage.width(),startbuttonimage.height());
     //設置start button的觸發方式是用鼠標click
     QObject::connect(&startbutton, &QPushButton::clicked, [&](){
         //觸發完click後，關閉start screen
         start.close();
+    ///////////////////////////////////////////////////////////
 
+    //////////////////// create background scene ////////////////////
         //create a scene
         QGraphicsScene *scene = new QGraphicsScene();
 
@@ -87,6 +91,36 @@ int main(int argc, char *argv[])
         // set the view size
         view -> setFixedSize(1400,620);
         view -> show();
+        //add castle
+        Castle::CreateCastle(scene);
+    ///////////////////////////////////////////////////////////
+
+        //////////////////// create the player ////////////////////
+        Player *mario = new Player();
+        mario->setPos(250,470); // TODO generalize to always be in the middle bottom of screen
+        // make the player focusable and set it to be the current focus
+        mario->setFlag(QGraphicsItem::ItemIsFocusable);
+        mario->setFocus();
+        scene ->addItem(mario);
+        ///////////////////////////////////////////////////////////
+
+        //////////////////// create bricks and pipes ////////////////////
+        FloorBrick::CreateFloorBricks(scene); // floor bricks
+        BoxBrick::CreateBoxBricks(scene); // box bricks
+        BrokenBrick::CreateBrokenBricks(scene); // broken bricks
+        NormalBrick::CreateNormalBricks(scene); //normal bricks without coins)
+        NormalBrickwCoin::CreateNormalBrickswCoin(scene); //normal bricks with coin
+        WaterPipe::CreateWaterPipes(scene); //water pipes
+        ///////////////////////////////////////////////////////
+
+        /////////////////view//////////////////////////////////
+        // visualize (view)
+        QGraphicsView *view = new QGraphicsView(scene);
+        // set the view size and initial position: (0,0)
+        view -> setFixedSize(1400,619);
+        view -> move(0,0); //view position
+        view -> show();
+        ////////////////////////////////////////////////////////////
     });
 
     start.exec(); //show the start dialog

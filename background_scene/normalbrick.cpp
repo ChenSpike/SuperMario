@@ -2,10 +2,10 @@
 #include "score.h"
 #include <QPixmap>
 
-NormalBrick::NormalBrick(bool withCoin) :
+NormalBrick::NormalBrick(const QPixmap& pixmap, bool withCoin) :
     coinCount(0), isNormalBrickWCoin(withCoin), initialY(0), isBouncing(false){
     // Set normal brick image
-    setPixmap(QPixmap(":/new/dataset/dataset/normal brick.png"));
+    setPixmap(pixmap);
     // connect bounce timer and coin timer
     bounceTimer = new QTimer(this);
     coinTimer = new QTimer(this);
@@ -14,21 +14,78 @@ NormalBrick::NormalBrick(bool withCoin) :
 }
 
 void NormalBrick::CreateNormalBricks(QGraphicsScene* scene){
-    QVector<NormalBrick*> vNormalBrick;
-    int position[] = {10, 11}; // create no-coin normal bricks at different position
-    for(int i=0; i<2; i++){
-        NormalBrick* noCoinNormalBrick = new NormalBrick();
-        noCoinNormalBrick -> setPos(position[i] * 50, 400);
-        scene -> addItem(noCoinNormalBrick);
-        vNormalBrick.append(noCoinNormalBrick);
+    QPixmap NormalBrickImage(":/new/dataset/dataset/normal brick.png");
+    QVector<NormalBrick*> NormalBricks;
+    // create no-coin normal bricks at different position
+    for(int i=0;i<19;i++){
+        //Frame 1 Normal Bricks
+        if(i==0||i==1){
+            NormalBrick *normalbrick0 = new NormalBrick(NormalBrickImage);
+            normalbrick0 -> setPos((1050+(i*200)),320);
+            scene ->addItem(normalbrick0);
+            NormalBricks.append(normalbrick0);
+        }
+        //Frame 2 Normal Bricks
+        if(i==2||i==3){
+            NormalBrick *normalbrick1 = new NormalBrick(NormalBrickImage);
+            normalbrick1 -> setPos((2100+(i*50)),320);
+            scene ->addItem(normalbrick1);
+            NormalBricks.append(normalbrick1);
+        }
+        if(i==4||i==5){
+            NormalBrick *normalbrick2 = new NormalBrick(NormalBrickImage);
+            normalbrick2 -> setPos((2000+(i*50)),150);
+            scene ->addItem(normalbrick2);
+            NormalBricks.append(normalbrick2);
+        }
+        //Frame 3 and 4 Normal Bricks
+        if(i>5&&i<14){
+            NormalBrick *normalbrick3 = new NormalBrick(NormalBrickImage);
+            normalbrick3 -> setPos((3700+(i*50)),150);
+            scene ->addItem(normalbrick3);
+            NormalBricks.append(normalbrick3);
+        }
+        if(i==14||i==15||i==16){
+            NormalBrick *normalbrick4 = new NormalBrick(NormalBrickImage);
+            normalbrick4 -> setPos((3850+(i*50)),150);
+            scene ->addItem(normalbrick4);
+            NormalBricks.append(normalbrick4);
+        }
+        //Frame 5 Normal Bricks
+        if(i==17||i==18){
+            NormalBrick *normalbrick5 = new NormalBrick(NormalBrickImage);
+            normalbrick5 -> setPos((5150+(i*50)),150);
+            scene ->addItem(normalbrick5);
+            NormalBricks.append(normalbrick5);
+        }
+        else{
+            continue;
+        }
     }
-    position[0] = 13;
-    position[1] = 14; // create coin normal bricks at different position
-    for(int i=0; i<2; i++){
-        NormalBrick* coinNormalBrick = new NormalBrick(true);
-        coinNormalBrick -> setPos(position[i] * 50, 400);
-        scene -> addItem(coinNormalBrick);
-        vNormalBrick.append(coinNormalBrick);
+    for(int i=0;i<3;i++){
+        //Frame 1 Normal Bricks
+        if(i==0){
+            NormalBrick *normalbrick0 = new NormalBrick(NormalBrickImage,true);
+            normalbrick0 -> setPos(1150,320);
+            scene ->addItem(normalbrick0);
+            NormalBricks.append(normalbrick0);
+        }
+        //Frame 2 Normal Bricks
+        if(i==1){
+            NormalBrick *normalbrick1 = new NormalBrick(NormalBrickImage,true);
+            normalbrick1 -> setPos(4700,320);
+            scene ->addItem(normalbrick1);
+            NormalBricks.append(normalbrick1);
+        }
+        if(i==2){
+            NormalBrick *normalbrick2 = new NormalBrick(NormalBrickImage,true);
+            normalbrick2 -> setPos(6050,150);
+            scene ->addItem(normalbrick2);
+            NormalBricks.append(normalbrick2);
+        }
+        else{
+            continue;
+        }
     }
 }
 
@@ -90,7 +147,7 @@ void NormalBrick::coinFly(){
             coinTimer->stop();
             scene()->removeItem(coin);
             delete coin;
-            coin = nullptr;
-        }
+            coin = nullptr;}
     }
+
 }

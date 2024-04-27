@@ -9,7 +9,7 @@
 class NormalBrick : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    NormalBrick(bool withCoin = false);
+    NormalBrick(const QPixmap& pixmap, bool withCoin = false);
     static void CreateNormalBricks(QGraphicsScene* scene);
     void handleCollision();
 private:
