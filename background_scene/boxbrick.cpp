@@ -1,109 +1,133 @@
 #include "boxbrick.h"
-#include "coin.h"
 #include "score.h"
+#include "coin.h"
+#include "fireflower.h"
+#include "supermushroom.h"
 #include <QGraphicsScene>
 #include <QPixmap>
-#include <QTimer>
 
-BoxBrick::BoxBrick() : isBoxBrick(true){
-    // Set box brick image
-    setPixmap(QPixmap(":/new/dataset/dataset/box brick.png"));
-    // connect coin timer to coinFly
-    coinTimer = new QTimer(this);
-    connect(coinTimer, &QTimer::timeout, this, &BoxBrick::coinFly);
+QVector<BoxBrick*> BoxBrick::BoxBricks;
+
+BoxBrick::BoxBrick(ItemType type, QGraphicsItem *parent):
+    QGraphicsPixmapItem(parent),
+    itemType(type),
+    isBoxBrick(true),
+    bounceTimer(new QTimer(this)),
+    bounceStep(-10), // bounce upward (-10px)
+    initialY(0)
+{
+    setPixmap(QPixmap(":/new/dataset/dataset/box brick.png")); // Set box brick image
+    connect(bounceTimer, &QTimer::timeout, this, &BoxBrick::bounce); // connect bounce timer to bounce
 }
 
 void BoxBrick::CreateBoxBricks(QGraphicsScene* scene){
     // create box bricks at different position and store the positions in a vector
-    QVector <BoxBrick*> BoxBricks;
-    for(int i=0; i<8; i++){
+    BoxBrick *newBoxBrick;
+    for(int i=0;i<8;i++){
         //Frame 1 Box Bricks
         if(i==0){
-            BoxBrick *boxBrick0 = new BoxBrick();
-            boxBrick0 -> setPos(850, 320);
-            scene -> addItem(boxBrick0);
-            BoxBricks.append(boxBrick0);
+            newBoxBrick = new BoxBrick(SUPERMUSHROOM);
+            //newBoxBrick -> setPos(850, 320);
+            newBoxBrick -> setPos(850, 400);
         }
         if(i==1){
-            BoxBrick *boxBrick1 = new BoxBrick();
-            boxBrick1 -> setPos(1100,320);
-            scene -> addItem(boxBrick1);
-            BoxBricks.append(boxBrick1);
+            newBoxBrick = new BoxBrick(FIREFLOWER);
+            newBoxBrick -> setPos(1100,320);
         }
-        //Frame 2 Box Brick
+        //Frame 2 Box Bricks
         if(i==2){
-            BoxBrick *boxBrick2 = new BoxBrick();
-            boxBrick2 -> setPos(2150,320);
-            scene -> addItem(boxBrick2);
-            BoxBricks.append(boxBrick2);
+            newBoxBrick = new BoxBrick();
+            newBoxBrick -> setPos(2150,320);
         }
         //Frame 3 Box Bricks
         if(i==3){
-            BoxBrick *boxBrick3 = new BoxBrick();
-            boxBrick3 -> setPos(3200,300);
-            scene -> addItem(boxBrick3);
-            BoxBricks.append(boxBrick3);
+            newBoxBrick = new BoxBrick();
+            newBoxBrick -> setPos(3200,300);
         }
         if(i==4){
-            BoxBrick *boxBrick4 = new BoxBrick();
-            boxBrick4 -> setPos(3900,320);
-            scene -> addItem(boxBrick4);
-            BoxBricks.append(boxBrick4);
+            newBoxBrick = new BoxBrick();
+            newBoxBrick -> setPos(3900,320);
         }
         //Frame 4 Box Bricks
         if(i==5){
-            BoxBrick *boxBrick5 = new BoxBrick();
-            boxBrick5 -> setPos(4700,150);
-            scene -> addItem(boxBrick5);
-            BoxBricks.append(boxBrick5);
+            newBoxBrick = new BoxBrick();
+            newBoxBrick -> setPos(4700,150);
         }
         if(i==6){
-            BoxBrick *boxBrick6 = new BoxBrick();
-            boxBrick6 -> setPos(5450,220);
-            scene -> addItem(boxBrick6);
-            BoxBricks.append(boxBrick6);
+            newBoxBrick = new BoxBrick();
+            newBoxBrick -> setPos(5450,220);
         }
-        //Frame 5 Box Brick
+        //Frame 5 Box Bricks
         if(i==7){
-            BoxBrick *boxBrick7 = new BoxBrick();
-            boxBrick7 -> setPos(5800,320);
-            scene -> addItem(boxBrick7);
-            BoxBricks.append(boxBrick7);
+            newBoxBrick = new BoxBrick();
+            newBoxBrick -> setPos(5800,320);
         }
-        else{
-            continue;
-        }
+        scene -> addItem(newBoxBrick);
+        BoxBricks.append(newBoxBrick);
     }
+    return;
 }
 
 void BoxBrick::handleCollision(){
     // Change the pixmap to stone brick after collision
     if (isBoxBrick) {
-        setPixmap(QPixmap(":/new/dataset/dataset/stone brick.png"));
         isBoxBrick = false; // set as stone brick state
-        createCoin(); // create a coin
+        setBounce();
     }
+    return;
 }
 
-void BoxBrick::createCoin(){
-    // Create a coin and increase the score
-    coin = new Coin();
-    scene() -> addItem(coin);
-    coin->setPos(this->x(), this->y() - coin->boundingRect().height()); // Set position above the stone brick
-    Score::getInstance()->increase();  // Increase the score
-
-    // Start a timer for the coin to fly up and then disappear
-    coinTimer->start(20);
+void BoxBrick::setBounce(){
+    initialY = y(); // set initial y position
+    bounceTimer->start(20); // start bounce timer
 }
 
-void BoxBrick::coinFly(){
-    if (coin) {
-        coin->setPos(coin->x(), coin->y() - 10); // coin goes up
-        if (coin->y() <= this->y() - 100) { // height limit: 100px
-            coinTimer->stop();
-            scene()->removeItem(coin);
-            delete coin;
-            coin = nullptr;
-        }
+void BoxBrick::bounce() {
+    setPos(x(), y() + bounceStep);
+    if (bounceStep < 0 && y() <= initialY - 30) { // bounce height limit 30px
+        bounceStep = 10; // change direction after reaching height limit
+        setPixmap(QPixmap(":/new/dataset/dataset/stone brick.png"));
+        createItem(); // create an item
     }
+    else if (bounceStep > 0 && y() >= initialY) {
+        // stop timer when bouncing back to initial y
+        bounceTimer->stop();
+        bounceStep = -10;
+        setPos(x(), initialY);
+    }
+    return;
+}
+
+// Create an item above a box brick
+void BoxBrick::createItem(){
+    switch (itemType) {
+    case COIN: {
+        Score::getInstance()->increase(); // Increase the score
+        // create a coin and the coin will fly
+        Coin *coin = new Coin();
+        coin->setPos(this->x(), this->y() - coin->boundingRect().height());
+        scene() -> addItem(coin);
+        coin->setFly();
+        break;
+    }
+    case SUPERMUSHROOM: {
+        SuperMushroom *superMushroom = new SuperMushroom();
+        qreal bounceStartY = this->y() - superMushroom->boundingRect().height();
+        qreal bounceEndY = initialY - this->boundingRect().height();
+        superMushroom->setPos(this->x(), bounceStartY);
+        scene()->addItem(superMushroom);
+        superMushroom->setBounce(bounceEndY);
+        break;
+    }
+    case FIREFLOWER: {
+        FireFlower *fireFlower = new FireFlower();
+        qreal bounceStartY = this->y() - fireFlower->boundingRect().height();
+        qreal bounceEndY = initialY - this->boundingRect().height();
+        fireFlower->setPos(this->x(), bounceStartY);
+        scene()->addItem(fireFlower);
+        fireFlower->setBounce(bounceEndY);
+        break;
+    }
+    }
+    return;
 }

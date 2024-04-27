@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     start.close();
     ///////////////////////////////////////////////////////////
 
-    //////////////////// create background scene ////////////////////
+        //////////////////// create background scene ////////////////////
         //create a scene
         QGraphicsScene *scene = new QGraphicsScene();
 
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
         scene -> addItem(score);
         //add castle
         Castle::CreateCastle(scene);
-    ///////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
 
         //////////////////// create the player ////////////////////
         Player *mario = new Player();
@@ -85,15 +85,15 @@ int main(int argc, char *argv[])
         BoxBrick::CreateBoxBricks(scene); // box bricks
         BrokenBrick::CreateBrokenBricks(scene); // broken bricks
         NormalBrick::CreateNormalBricks(scene); //normal bricks without coins
-        WaterPipe::CreateWaterPipes(scene); //water pipes
-        ///////////////////////////////////////////////////////
+        WaterPipe::CreateWaterPipes(scene); // water pipes
+        /////////////////////////////////////////////////////////////////
 
-        /////////////////view//////////////////////////////////
+        //////////////////// view //////////////////////////////////
         // visualize (view)
         QGraphicsView *view = new QGraphicsView(scene);
         // set the view size and initial position: (0,0)
         view -> setFixedSize(1400,619);
-        view -> move(0,0); //view position
+        view -> move(0,0); // view position
         view -> show();
         ////////////////////////////////////////////////////////////
     });

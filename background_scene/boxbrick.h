@@ -4,23 +4,30 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QTimer>
-#include "coin.h"
 
 class BoxBrick: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    BoxBrick();
+    enum ItemType {
+        COIN,
+        SUPERMUSHROOM,
+        FIREFLOWER
+    };
+
+    BoxBrick(ItemType type = COIN, QGraphicsItem *parent = nullptr);
     static void CreateBoxBricks(QGraphicsScene* scene);
+    static QVector<BoxBrick*> BoxBricks;
     void handleCollision(); // handle collision
 private:
-    Coin *coin;
-    void createCoin(); // create a coin
+    ItemType itemType;
     bool isBoxBrick; // State of being a stone brick
-    QTimer *jumpTimer; // 用於跳躍的計時器
-    QTimer *coinTimer; // coin flying timer
-    qreal jumpStep; // 跳躍的步驟大小
+    QTimer *bounceTimer; // box brick bouncing timer
+    qreal bounceStep; // the step when the brick is bouncing
+    qreal initialY; // initial y position of the normal brick
+    void setBounce();
+    void createItem(); // Create an item above a box brick
 private slots:
-    void coinFly();
+    void bounce();
 };
 
 #endif // BOXBRICK_H

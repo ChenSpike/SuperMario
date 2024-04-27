@@ -24,5 +24,9 @@
         <file>dataset/start_btn.png</file>
         <file>dataset/start_screen.png</file>
         <file>castle.png</file>
+        <file>dataset/Fire Flower.png</file>
+        <file>dataset/super mushroom.png</file>
+        <file>dataset/mario_L_run1.png</file>
+        <file>dataset/mario_R_run1.png</file>
     </qresource>
 </RCC>

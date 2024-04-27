@@ -11,15 +11,15 @@ class Player:public QObject, public QGraphicsPixmapItem{
 public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
-    void jumpStep();
     void grow();
 private:
     QTimer* jumpTimer;
-    int velocity;
-    int maxHeight = 100; // 跳躍高度
-    bool isJumping = false; // 跳躍狀態
-    bool isBig = false;
-
+    int velocity; // initial velocity
+    int maxHeight; // maximum jumping height
+    bool isJumping; // state of jumping
+    bool isBig; // state of big or small
+private slots:
+    void jumpStep();
 };
 
 

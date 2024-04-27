@@ -1,18 +1,20 @@
 #include "coin.h"
 #include <QPixmap>
-#include <QTimer>
 
-//Coin* Coin::instance = nullptr;
+QVector<Coin*> Coin::vCoin;
 
-Coin::Coin() {
+Coin::Coin(QGraphicsItem *parent):
+    QGraphicsPixmapItem(parent),
+    initialY(0),
+    flyTimer(new QTimer(this))
+{
     // Set the pixmap to coin image
-    QPixmap pixmap(":/new/dataset/dataset/coin.png");
-    setPixmap(pixmap);
+    setPixmap(QPixmap(":/new/dataset/dataset/coin.png"));
+    connect(flyTimer, &QTimer::timeout, this, &Coin::fly);
 }
 
 void Coin::CreateCoins(QGraphicsScene* scene){
     // create coins at different position
-    QVector<Coin*> vCoin;
     int position[] = {7, 8, 9, 10, 11, 12};
     for(int i=0; i<6; i++){
         Coin* newCoin = new Coin();
@@ -20,20 +22,21 @@ void Coin::CreateCoins(QGraphicsScene* scene){
         scene -> addItem(newCoin);
         vCoin.append(newCoin);
     }
+    return;
 }
 
-/*
-Coin* Coin::getInstance()
-{
-    if (!instance)
-        instance = new Coin();
-    return instance;
+void Coin::setFly(){
+    initialY = y(); // set initial y position
+    flyTimer->start(20); // start bounce timer
+    return;
 }
 
-void Coin::create()
-{
-    // Create a new coin at a random position
-    Coin *coin = new Coin();
-    coin->setPos(500, 200); // You can set the position as you like
-    scene()->addItem(coin);
-}*/
+void Coin::fly(){
+    setPos(x(), y() - 10); // coin goes up
+    if (y() <= initialY - 100) { // height limit: 100px
+        flyTimer->stop();
+        scene()->removeItem(this);
+        delete this;
+    }
+    return;
+}

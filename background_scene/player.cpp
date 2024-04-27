@@ -9,13 +9,16 @@
 #include <QKeyEvent>
 #include <QList>
 
-Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent){
-
-    // set graphic
-    setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
-    jumpTimer = new QTimer(this);
+Player::Player(QGraphicsItem *parent):
+    QGraphicsPixmapItem(parent),
+    jumpTimer(new QTimer(this)),
+    velocity(0), // initial velocity
+    maxHeight(100), // maximum jumping height
+    isJumping(false),
+    isBig(false)
+{
+    setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png")); // set initial mario pose
     connect(jumpTimer, &QTimer::timeout, this, &Player::jumpStep);
-    velocity = 0; // 初始速度
 }
 
 void Player::grow() {
@@ -23,38 +26,39 @@ void Player::grow() {
         setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
         isBig = true;
     }
+    return;
 }
 
 void Player::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Left){
-        if(!isBig)
-            setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
         if(isBig)
             setPixmap(QPixmap(":/new/dataset/dataset/mario_L_run1.png"));
+        else
+            setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
         setPos(x()-25, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
     }
     else if (event->key() == Qt::Key_Right){
-        if(!isBig)
-            setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
         if(isBig)
             setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
+        else
+            setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
         setPos(x()+25, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
     }
     else if (event->key() == Qt::Key_Space && !isJumping) {
-        isJumping = true;
-        if(!isBig)
-            velocity = -15;  // Adjust the initial jump velocity as needed
         if(isBig)
-            velocity = -20;  // Adjust the initial jump velocity as needed
+            velocity = -20;  // initial jump velocity = -20px
+        else
+            velocity = -15;  // initial jump velocity = -15px
+        isJumping = true;
         jumpTimer->start(20);
     }
-
+    return;
 }
 
 void Player::jumpStep() {
@@ -66,35 +70,19 @@ void Player::jumpStep() {
     QList<QGraphicsItem* > colliding_items = collidingItems();
     for (int i=0; i < colliding_items.size(); i++){
 
-        // check whether the player collided with BoxBrick
+        // collided with BoxBrick
         if(typeid(*(colliding_items[i])) == typeid(BoxBrick)){
             BoxBrick *boxbrick = dynamic_cast<BoxBrick *>(colliding_items[i]);
 
+            qreal buttomBrick = boxbrick->y() + boxbrick->pixmap().height();
             // check if hit from the bottom
-            if(velocity < 0 && pos().y() + pixmap().height() > boxbrick->y() + boxbrick->pixmap().height()){
-                // stop the jumpTimer and set the starting point for falling down
+            if(velocity < 0 && y() > boxbrick->y()){
+                // stop jumping and start to fall down
                 velocity = 0;
-                setPos(x(), y());
-                isJumping = false;
-                jumpTimer->stop();
-
+                setPos(x(), buttomBrick);
+                jumpTimer->stop(); // stop jumping
                 boxbrick->handleCollision(); // change to the block brick
-
-                // mario fall to ground
-                QTimer *fallTimer = new QTimer(this);
-                // lambda 函数由 timeout 信號每 20 毫秒觸發，因為 start(20) 決定 timeout 的時間間隔為 20 毫秒
-                connect(fallTimer, &QTimer::timeout, [=]() {
-                    velocity += 1;
-                    if (y() <= 470) { // 检查是否達到地面
-                        setPos(x(), y() + velocity); // gradually drop to the ground
-                    }
-                    else {
-                        velocity = 0;
-                        fallTimer->stop(); // 停止落地动画
-                        delete fallTimer;
-                    }
-                });
-                fallTimer->start(20); // 每 20 毫秒更新位置
+                jumpStep(); // start to fall
                 break;
             }
 
@@ -118,13 +106,19 @@ void Player::jumpStep() {
             }
         }
         
-        // check whether the player collided with BrokenBrick
+        // collided with BrokenBrick
         if (typeid(*(colliding_items[i])) == typeid(BrokenBrick)) {
             BrokenBrick *brokenbrick = dynamic_cast<BrokenBrick *>(colliding_items[i]);
 
+            qreal buttomBrick = brokenbrick->y() + brokenbrick->pixmap().height();
             // Check if hit from the bottom
             if (velocity < 0 && y() > brokenbrick->y()) {
-                brokenbrick->breakBrick();
+                // stop jumping and start to fall down
+                velocity = 0;
+                setPos(x(), buttomBrick);
+                jumpTimer->stop(); // stop jumping
+                brokenbrick->breakBrick(); // broken brick disappear
+                jumpStep(); // start to fall
                 break;
             }
 
@@ -139,41 +133,26 @@ void Player::jumpStep() {
             if (x() < brokenbrick->x() + brokenbrick->pixmap().width() && x() + pixmap().width() > brokenbrick->x()) {
                 if (x() < brokenbrick->x()) {
                     setPos(brokenbrick->x() - pixmap().width(), y());
-                } else {
+                }
+                else {
                     setPos(brokenbrick->x() + brokenbrick->pixmap().width(), y());
                 }
-            }            
+            }
         }
 
-        // check whether the player collided with NormalBrick
+        // collided with NormalBrick
         if(typeid(*(colliding_items[i])) == typeid(NormalBrick)){
             NormalBrick *normalbrick = dynamic_cast<NormalBrick *>(colliding_items[i]);
 
+            qreal buttomBrick = normalbrick->y() + normalbrick->pixmap().height();
             // check if hit from the bottom
-            if(velocity < 0 && pos().y() + pixmap().height() > normalbrick->y() + normalbrick->pixmap().height()){
-                // stop the jumpTimer and set the starting point for falling down
+            if(velocity < 0 && y() > normalbrick->y()){
+                // stop jumping and start to fall down
                 velocity = 0;
-                setPos(x(), y());
-                isJumping = false;
-                jumpTimer->stop();
-
+                setPos(x(), buttomBrick);
+                jumpTimer->stop(); // stop jumping
                 normalbrick->handleCollision(); // change to the block brick
-
-                // mario fall to ground
-                QTimer *fallTimer = new QTimer(this);
-                // lambda 函数由 timeout 信號每 20 毫秒觸發，因為 start(20) 決定 timeout 的時間間隔為 20 毫秒
-                connect(fallTimer, &QTimer::timeout, [=]() {
-                    velocity += 1;
-                    if (y() <= 450) { // 检查是否达到地面
-                        setPos(x(), y() + velocity); // gradually drop to the ground
-                    }
-                    else {
-                        velocity = 0;
-                        fallTimer->stop(); // 停止落地动画
-                        delete fallTimer;
-                    }
-                });
-                fallTimer->start(20); // 每 20 毫秒更新位置
+                jumpStep(); // start to fall
                 break;
             }
 
@@ -197,21 +176,18 @@ void Player::jumpStep() {
             }
         }
 
-        // collided with coin
+        // collided with Coin
         if (typeid(*(colliding_items[i])) == typeid(Coin)) {
             Coin *coin = dynamic_cast<Coin*>(colliding_items[i]);
             scene()->removeItem(coin); // delete the coin
             delete coin; // release memory
             Score::getInstance()->increase(); // score + 1
         }
+
+        // collided with Super Mushroom
         if(typeid(*(colliding_items[i])) == typeid(SuperMushroom)) {
             grow();
         }
-
-
-
-
-
     }
 
     // 检查是否完成跳跃（是否回到了初始高度或更低）
@@ -221,6 +197,7 @@ void Player::jumpStep() {
         isJumping = false; // 结束跳跃
         velocity = 0; // 重置速度
     }
+    return;
 }
 
 

@@ -13,6 +13,7 @@ SOURCES += \
     brokenbrick.cpp \
     castle.cpp \
     coin.cpp \
+    fireflower.cpp \
     floorbrick.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     castle.h \
     coin.h \
     brokenbrick.h \
+    fireflower.h \
     floorbrick.h \
     game.h \
     mainwindow.h \
