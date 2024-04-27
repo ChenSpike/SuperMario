@@ -21,6 +21,8 @@ void SuperMushroom::move()
         if (typeid(*(colliding_item[i])) == typeid(WaterPipe)) {
             direction = -direction;  // 改變方向
         } else if (typeid(*(colliding_item[i])) == typeid(Player)) {
+            Player *player = dynamic_cast<Player *>(colliding_item[i]);
+            player->grow();
             scene()->removeItem(this);
             delete this;
             return;
