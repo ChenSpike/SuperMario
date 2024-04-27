@@ -106,3 +106,4 @@ void BoxBrick::coinFly(){
             coin = nullptr;
         }
     }
+}

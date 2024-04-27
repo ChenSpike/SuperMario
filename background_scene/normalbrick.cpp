@@ -65,23 +65,23 @@ void NormalBrick::CreateNormalBricks(QGraphicsScene* scene){
     for(int i=0;i<3;i++){
         //Frame 1 Normal Bricks
         if(i==0){
-            NormalBrick *normalbrick0 = new NormalBrick(NormalBrickImage,true);
-            normalbrick0 -> setPos(1150,320);
-            scene ->addItem(normalbrick0);
-            NormalBricks.append(normalbrick0);
+            NormalBrick *normalbrickc0 = new NormalBrick(NormalBrickImage,true);
+            normalbrickc0 -> setPos(1150,320);
+            scene ->addItem(normalbrickc0);
+            NormalBricks.append(normalbrickc0);
         }
         //Frame 2 Normal Bricks
         if(i==1){
-            NormalBrick *normalbrick1 = new NormalBrick(NormalBrickImage,true);
-            normalbrick1 -> setPos(4700,320);
-            scene ->addItem(normalbrick1);
-            NormalBricks.append(normalbrick1);
+            NormalBrick *normalbrickc1 = new NormalBrick(NormalBrickImage,true);
+            normalbrickc1 -> setPos(4700,320);
+            scene ->addItem(normalbrickc1);
+            NormalBricks.append(normalbrickc1);
         }
         if(i==2){
-            NormalBrick *normalbrick2 = new NormalBrick(NormalBrickImage,true);
-            normalbrick2 -> setPos(6050,150);
-            scene ->addItem(normalbrick2);
-            NormalBricks.append(normalbrick2);
+            NormalBrick *normalbrickc2 = new NormalBrick(NormalBrickImage,true);
+            normalbrickc2 -> setPos(6050,150);
+            scene ->addItem(normalbrickc2);
+            NormalBricks.append(normalbrickc2);
         }
         else{
             continue;

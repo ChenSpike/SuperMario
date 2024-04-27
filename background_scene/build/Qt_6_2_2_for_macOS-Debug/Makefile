@@ -60,8 +60,8 @@ SOURCES       = ../../boxbrick.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../normalbrick.cpp \
-		../../normalbrickwcoin.cpp \
 		../../player.cpp \
+		../../score.cpp \
 		../../supermushroom.cpp \
 		../../waterpipe.cpp qrc_background_scene_resource.cpp \
 		moc_boxbrick.cpp \
@@ -69,7 +69,6 @@ SOURCES       = ../../boxbrick.cpp \
 		moc_brokenbrick.cpp \
 		moc_mainwindow.cpp \
 		moc_normalbrick.cpp \
-		moc_normalbrickwcoin.cpp \
 		moc_player.cpp \
 		moc_supermushroom.cpp \
 		moc_waterpipe.cpp
@@ -81,8 +80,8 @@ OBJECTS       = boxbrick.o \
 		main.o \
 		mainwindow.o \
 		normalbrick.o \
-		normalbrickwcoin.o \
 		player.o \
+		score.o \
 		supermushroom.o \
 		waterpipe.o \
 		qrc_background_scene_resource.o \
@@ -91,7 +90,6 @@ OBJECTS       = boxbrick.o \
 		moc_brokenbrick.o \
 		moc_mainwindow.o \
 		moc_normalbrick.o \
-		moc_normalbrickwcoin.o \
 		moc_player.o \
 		moc_supermushroom.o \
 		moc_waterpipe.o
@@ -353,8 +351,8 @@ DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/f
 		../../game.h \
 		../../mainwindow.h \
 		../../normalbrick.h \
-		../../normalbrickwcoin.h \
 		../../player.h \
+		../../score.h \
 		../../stonebrick.h \
 		../../supermushroom.h \
 		../../waterpipe.h ../../boxbrick.cpp \
@@ -365,8 +363,8 @@ DIST          = /Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/f
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../normalbrick.cpp \
-		../../normalbrickwcoin.cpp \
 		../../player.cpp \
+		../../score.cpp \
 		../../supermushroom.cpp \
 		../../waterpipe.cpp
 QMAKE_TARGET  = background_scene
@@ -934,8 +932,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../background_scene_resource.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../boxbrick.h ../../castle.h ../../coin.h ../../brokenbrick.h ../../floorbrick.h ../../game.h ../../mainwindow.h ../../normalbrick.h ../../normalbrickwcoin.h ../../player.h ../../stonebrick.h ../../supermushroom.h ../../waterpipe.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../boxbrick.cpp ../../brokenbrick.cpp ../../castle.cpp ../../coin.cpp ../../floorbrick.cpp ../../main.cpp ../../mainwindow.cpp ../../normalbrick.cpp ../../normalbrickwcoin.cpp ../../player.cpp ../../supermushroom.cpp ../../waterpipe.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../boxbrick.h ../../castle.h ../../coin.h ../../brokenbrick.h ../../floorbrick.h ../../game.h ../../mainwindow.h ../../normalbrick.h ../../player.h ../../score.h ../../stonebrick.h ../../supermushroom.h ../../waterpipe.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../boxbrick.cpp ../../brokenbrick.cpp ../../castle.cpp ../../coin.cpp ../../floorbrick.cpp ../../main.cpp ../../mainwindow.cpp ../../normalbrick.cpp ../../player.cpp ../../score.cpp ../../supermushroom.cpp ../../waterpipe.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -994,18 +992,25 @@ qrc_background_scene_resource.cpp: ../../background_scene_resource.qrc \
 		../../dataset/start_screen.png
 	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/rcc -name background_scene_resource ../../background_scene_resource.qrc -o qrc_background_scene_resource.cpp
 
-compiler_moc_header_make_all: moc_boxbrick.cpp moc_coin.cpp moc_brokenbrick.cpp moc_mainwindow.cpp moc_normalbrick.cpp moc_normalbrickwcoin.cpp moc_player.cpp moc_supermushroom.cpp moc_waterpipe.cpp
+compiler_moc_header_make_all: moc_boxbrick.cpp moc_coin.cpp moc_brokenbrick.cpp moc_mainwindow.cpp moc_normalbrick.cpp moc_player.cpp moc_supermushroom.cpp moc_waterpipe.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_boxbrick.cpp moc_coin.cpp moc_brokenbrick.cpp moc_mainwindow.cpp moc_normalbrick.cpp moc_normalbrickwcoin.cpp moc_player.cpp moc_supermushroom.cpp moc_waterpipe.cpp
+	-$(DEL_FILE) moc_boxbrick.cpp moc_coin.cpp moc_brokenbrick.cpp moc_mainwindow.cpp moc_normalbrick.cpp moc_player.cpp moc_supermushroom.cpp moc_waterpipe.cpp
 moc_boxbrick.cpp: ../../boxbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../coin.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc
 	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=15 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang -I/Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib ../../boxbrick.h -o moc_boxbrick.cpp
 
 moc_coin.cpp: ../../coin.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
@@ -1033,18 +1038,13 @@ moc_normalbrick.cpp: ../../normalbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../coin.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc
 	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=15 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang -I/Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib ../../normalbrick.h -o moc_normalbrick.cpp
-
-moc_normalbrickwcoin.cpp: ../../normalbrickwcoin.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc
-	/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=15 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/mkspecs/macx-clang -I/Users/sophiawannnsmacbookair/Downloads/SuperMario/SuperMario/background_scene -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers -I/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib ../../normalbrickwcoin.h -o moc_normalbrickwcoin.cpp
 
 moc_player.cpp: ../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
@@ -1104,15 +1104,15 @@ boxbrick.o: ../../boxbrick.cpp ../../boxbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
 		../../coin.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../score.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QVector \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qvector.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boxbrick.o ../../boxbrick.cpp
 
 brokenbrick.o: ../../brokenbrick.cpp ../../brokenbrick.h \
@@ -1135,6 +1135,8 @@ castle.o: ../../castle.cpp ../../castle.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o castle.o ../../castle.cpp
 
 coin.o: ../../coin.cpp ../../coin.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
@@ -1155,36 +1157,37 @@ floorbrick.o: ../../floorbrick.cpp ../../floorbrick.h \
 main.o: ../../main.cpp ../../mainwindow.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../score.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../floorbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../../stonebrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
-		../../boxbrick.h \
+		../../normalbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../normalbrick.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
-		../../normalbrickwcoin.h \
-		../../waterpipe.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QVector \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qvector.h \
-		../../castle.h \
-		../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
+		../../coin.h \
 		../../game.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../player.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../../boxbrick.h \
+		../../waterpipe.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QVector \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qvector.h \
+		../../castle.h \
 		../../brokenbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qapplication.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QDialog \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QPushButton \
@@ -1212,31 +1215,16 @@ normalbrick.o: ../../normalbrick.cpp ../../normalbrick.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QVector \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qvector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o normalbrick.o ../../normalbrick.cpp
-
-normalbrickwcoin.o: ../../normalbrickwcoin.cpp ../../normalbrickwcoin.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qobject.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
 		../../coin.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../score.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QPixmap \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QVector \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qvector.h \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
-		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o normalbrickwcoin.o ../../normalbrickwcoin.cpp
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qpixmap.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o normalbrick.o ../../normalbrick.cpp
 
 player.o: ../../player.cpp ../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
@@ -1247,15 +1235,28 @@ player.o: ../../player.cpp ../../player.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QTimer \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qtimer.h \
 		../../boxbrick.h \
-		../../brokenbrick.h \
-		../../supermushroom.h \
+		../../coin.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../brokenbrick.h \
+		../../normalbrick.h \
+		../../score.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		../../supermushroom.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QKeyEvent \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qevent.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QList \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/qlist.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../../player.cpp
+
+score.o: ../../score.cpp ../../score.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/QFont \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtGui.framework/Headers/qfont.h \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o score.o ../../score.cpp
 
 supermushroom.o: ../../supermushroom.cpp ../../supermushroom.h \
 		/Users/sophiawannnsmacbookair/Applications/6.2.2/macos/lib/QtCore.framework/Headers/QObject \
@@ -1306,9 +1307,6 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_normalbrick.o: moc_normalbrick.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_normalbrick.o moc_normalbrick.cpp
-
-moc_normalbrickwcoin.o: moc_normalbrickwcoin.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_normalbrickwcoin.o moc_normalbrickwcoin.cpp
 
 moc_player.o: moc_player.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_player.o moc_player.cpp

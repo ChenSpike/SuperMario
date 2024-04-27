@@ -1,4 +1,4 @@
-#include "minwindow.h"
+#include "mainwindow.h"
 #include "score.h"
 #include "floorbrick.h"
 #include "stonebrick.h"
@@ -6,7 +6,6 @@
 #include "game.h"
 #include "boxbrick.h"
 #include "coin.h"
-#include "normalbrickwcoin.h"
 #include "waterpipe.h"
 #include "castle.h"
 #include "player.h"
@@ -46,8 +45,8 @@ int main(int argc, char *argv[])
     startbutton.setGeometry(435,455,startbuttonimage.width(),startbuttonimage.height());
     //設置start button的觸發方式是用鼠標click
     QObject::connect(&startbutton, &QPushButton::clicked, [&](){
-        //觸發完click後，關閉start screen
-        start.close();
+    //觸發完click後，關閉start screen
+    start.close();
     ///////////////////////////////////////////////////////////
 
     //////////////////// create background scene ////////////////////
@@ -62,35 +61,12 @@ int main(int argc, char *argv[])
         QGraphicsPixmapItem* background = scene ->addPixmap(pixmap);
         background -> setPos(0,0);
 
-        //////////////////// create the player ////////////////////
-        Player *mario = new Player();
-        mario->setPos(200,450); // TODO generalize to always be in the middle bottom of screen
-        // make the player focusable and set it to be the current focus
-        mario->setFlag(QGraphicsItem::ItemIsFocusable);
-        mario->setFocus();
-        scene ->addItem(mario);
-        ///////////////////////////////////////////////////////////
-
-        //////////////////// create bricks ////////////////////
-        FloorBrick::CreateFloorBricks(scene); // floor bricks
-        BoxBrick::CreateBoxBricks(scene); // box bricks
-        BrokenBrick::CreateBrokenBricks(scene); // broken bricks
-        NormalBrick::CreateNormalBricks(scene); // normal bricks
-        ///////////////////////////////////////////////////////
-
         // create coins
         Coin::CreateCoins(scene);
 
         // create the score
         Score *score = new Score;
         scene -> addItem(score);
-
-        // visualize (view)
-        QGraphicsView *view = new QGraphicsView(scene);
-
-        // set the view size
-        view -> setFixedSize(1400,620);
-        view -> show();
         //add castle
         Castle::CreateCastle(scene);
     ///////////////////////////////////////////////////////////
@@ -108,8 +84,7 @@ int main(int argc, char *argv[])
         FloorBrick::CreateFloorBricks(scene); // floor bricks
         BoxBrick::CreateBoxBricks(scene); // box bricks
         BrokenBrick::CreateBrokenBricks(scene); // broken bricks
-        NormalBrick::CreateNormalBricks(scene); //normal bricks without coins)
-        NormalBrickwCoin::CreateNormalBrickswCoin(scene); //normal bricks with coin
+        NormalBrick::CreateNormalBricks(scene); //normal bricks without coins
         WaterPipe::CreateWaterPipes(scene); //water pipes
         ///////////////////////////////////////////////////////
 

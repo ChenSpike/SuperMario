@@ -1,5 +1,5 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'normalbrickwcoin.h'
+** Meta object code from reading C++ file 'brokenbrick.h'
 **
 ** Created by: The Qt Meta Object Compiler version 68 (Qt 6.2.2)
 **
@@ -7,11 +7,11 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../normalbrickwcoin.h"
+#include "../../brokenbrick.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'normalbrickwcoin.h' doesn't include <QObject>."
+#error "The header file 'brokenbrick.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
 #error "This file was generated using the moc from 6.2.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -21,22 +21,22 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_NormalBrickwCoin_t {
+struct qt_meta_stringdata_BrokenBrick_t {
     const uint offsetsAndSize[2];
-    char stringdata0[17];
+    char stringdata0[12];
 };
 #define QT_MOC_LITERAL(ofs, len) \
-    uint(offsetof(qt_meta_stringdata_NormalBrickwCoin_t, stringdata0) + ofs), len 
-static const qt_meta_stringdata_NormalBrickwCoin_t qt_meta_stringdata_NormalBrickwCoin = {
+    uint(offsetof(qt_meta_stringdata_BrokenBrick_t, stringdata0) + ofs), len 
+static const qt_meta_stringdata_BrokenBrick_t qt_meta_stringdata_BrokenBrick = {
     {
-QT_MOC_LITERAL(0, 16) // "NormalBrickwCoin"
+QT_MOC_LITERAL(0, 11) // "BrokenBrick"
 
     },
-    "NormalBrickwCoin"
+    "BrokenBrick"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_NormalBrickwCoin[] = {
+static const uint qt_meta_data_BrokenBrick[] = {
 
  // content:
       10,       // revision
@@ -52,7 +52,7 @@ static const uint qt_meta_data_NormalBrickwCoin[] = {
        0        // eod
 };
 
-void NormalBrickwCoin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void BrokenBrick::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     (void)_o;
     (void)_id;
@@ -60,14 +60,14 @@ void NormalBrickwCoin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     (void)_a;
 }
 
-const QMetaObject NormalBrickwCoin::staticMetaObject = { {
+const QMetaObject BrokenBrick::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_NormalBrickwCoin.offsetsAndSize,
-    qt_meta_data_NormalBrickwCoin,
+    qt_meta_stringdata_BrokenBrick.offsetsAndSize,
+    qt_meta_data_BrokenBrick,
     qt_static_metacall,
     nullptr,
-qt_incomplete_metaTypeArray<qt_meta_stringdata_NormalBrickwCoin_t
-, QtPrivate::TypeAndForceComplete<NormalBrickwCoin, std::true_type>
+qt_incomplete_metaTypeArray<qt_meta_stringdata_BrokenBrick_t
+, QtPrivate::TypeAndForceComplete<BrokenBrick, std::true_type>
 
 
 
@@ -76,22 +76,22 @@ qt_incomplete_metaTypeArray<qt_meta_stringdata_NormalBrickwCoin_t
 } };
 
 
-const QMetaObject *NormalBrickwCoin::metaObject() const
+const QMetaObject *BrokenBrick::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *NormalBrickwCoin::qt_metacast(const char *_clname)
+void *BrokenBrick::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_NormalBrickwCoin.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_BrokenBrick.stringdata0))
         return static_cast<void*>(this);
     if (!strcmp(_clname, "QGraphicsPixmapItem"))
         return static_cast< QGraphicsPixmapItem*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int NormalBrickwCoin::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int BrokenBrick::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     return _id;
