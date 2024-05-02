@@ -16,6 +16,7 @@ debug/moc_boxbrick.o
 debug/moc_coin.o
 debug/moc_brokenbrick.o
 debug/moc_fireflower.o
+debug/moc_floorbrick.o
 debug/moc_mainwindow.o
 debug/moc_normalbrick.o
 debug/moc_player.o

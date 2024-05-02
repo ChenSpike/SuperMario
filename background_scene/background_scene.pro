@@ -35,7 +35,6 @@ HEADERS += \
     normalbrick.h \
     player.h \
     score.h \
-    stonebrick.h \
     supermushroom.h \
     waterpipe.h
 

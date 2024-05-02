@@ -1,8 +1,15 @@
 #include "supermushroom.h"
 #include "waterpipe.h"
 #include "player.h"
+#include "boxbrick.h"
+#include "brokenbrick.h"
+#include "floorbrick.h"
+#include "normalbrick.h"
 #include <QGraphicsScene>
 #include <QList>
+#include <QDebug>
+#include <QPainter>
+#include <QGraphicsRectItem>
 
 SuperMushroom::SuperMushroom(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
@@ -10,6 +17,9 @@ SuperMushroom::SuperMushroom(QGraphicsItem *parent):
     finalY(0),
     bounceHeight(30),
     bounceStep(-10),
+    velocityX(5),
+    velocityY(0),
+    onBrick(true),
     bounceTimer(new QTimer(this)),
     moveTimer(new QTimer(this))
 {
@@ -17,6 +27,10 @@ SuperMushroom::SuperMushroom(QGraphicsItem *parent):
     setPixmap(QPixmap(":/new/dataset/dataset/super mushroom.png"));
     connect(bounceTimer, &QTimer::timeout, this, &SuperMushroom::bounce);
     connect(moveTimer, SIGNAL(timeout()), this, SLOT(move()));
+}
+
+QRectF SuperMushroom::boundingRect() const {
+    return QRectF(0, 0, pixmap().width(), pixmap().height());
 }
 
 void SuperMushroom::setBounce(qreal boxBrickY) {
@@ -29,7 +43,7 @@ void SuperMushroom::setBounce(qreal boxBrickY) {
 void SuperMushroom::bounce() {
     setPos(x(), y() + bounceStep);
     if (bounceStep < 0 && y() <= initialY - bounceHeight) {
-        bounceStep = 10; // change direction after reaching height limit
+        bounceStep = 5; // change direction after reaching height limit
     }
     else if (bounceStep > 0 && y() >= finalY) {
         // stop timer when landing on final y position
@@ -41,27 +55,154 @@ void SuperMushroom::bounce() {
     return;
 }
 
+int t=0;
 void SuperMushroom::move(){
-    // 檢查撞擊
-    QList<QGraphicsItem *> colliding_item = collidingItems();
-    for (int i = 0, n = colliding_item.size(); i < n; ++i) {
-        if (typeid(*(colliding_item[i])) == typeid(WaterPipe)) {
-            direction = -direction;  // 改變方向
-        }
-        else if (typeid(*(colliding_item[i])) == typeid(Player)) {
-            Player *player = dynamic_cast<Player *>(colliding_item[i]);
-            player->grow();
+    onBrick = false;
+
+    // check collision
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i) {
+        // collide with player
+        if (typeid(*(colliding_items[i])) == typeid(Player)) {
+            Player *player = dynamic_cast<Player *>(colliding_items[i]);
             scene()->removeItem(this);
+            moveTimer->stop();
+            player->grow();
+            delete this;
+            return;
+        }
+
+        // collide with bricks or pipes
+        if (typeid(*(colliding_items[i])) == typeid(WaterPipe)){
+            WaterPipe *ordinaryItem = dynamic_cast<WaterPipe *>(colliding_items[i]);
+            qreal rightMushroom = x() + pixmap().width();
+            qreal bottomMushroom = y() + pixmap().height();
+            qreal rightItem = ordinaryItem->x() + ordinaryItem->pixmap().width();
+            qreal bottomItem = ordinaryItem->y() + ordinaryItem->pixmap().height();
+            // top collsion
+            if (velocityY > 0 && bottomMushroom < bottomItem){
+                setPos(x(), ordinaryItem->y() - pixmap().height());
+                velocityY = 0;
+                onBrick = true;
+                break;
+            }
+            // side collision
+            if (x() < rightItem || rightMushroom > ordinaryItem->x()){
+                velocityX = -velocityX; // change direction
+            }
+        }
+        if (typeid(*(colliding_items[i])) == typeid(BoxBrick)) {
+            BoxBrick *ordinaryItem = dynamic_cast<BoxBrick *>(colliding_items[i]);
+            qreal rightMushroom = x() + pixmap().width();
+            qreal bottomMushroom = y() + pixmap().height();
+            qreal rightItem = ordinaryItem->x() + ordinaryItem->pixmap().width();
+            qreal bottomItem = ordinaryItem->y() + ordinaryItem->pixmap().height();
+            // top collsion
+            if (velocityY > 0 && bottomMushroom < bottomItem){
+                setPos(x(), ordinaryItem->y() - pixmap().height());
+                velocityY = 0;
+                onBrick = true;
+                break;
+            }
+
+            if (x() < rightItem || rightMushroom > ordinaryItem->x()){
+                velocityX = -velocityX; // change direction
+            }
+        }
+        if (typeid(*(colliding_items[i])) == typeid(BrokenBrick)) {
+            BrokenBrick *ordinaryItem = dynamic_cast<BrokenBrick *>(colliding_items[i]);
+            qreal rightMushroom = x() + pixmap().width();
+            qreal bottomMushroom = y() + pixmap().height();
+            qreal rightItem = ordinaryItem->x() + ordinaryItem->pixmap().width();
+            qreal bottomItem = ordinaryItem->y() + ordinaryItem->pixmap().height();
+            // top collsion
+            if (velocityY > 0 && bottomMushroom < bottomItem){
+                setPos(x(), ordinaryItem->y() - pixmap().height());
+                velocityY = 0;
+                onBrick = true;
+                break;
+            }
+            // side collision
+            if (x() < rightItem || rightMushroom > ordinaryItem->x()){
+                velocityX = -velocityX; // change direction
+            }
+        }
+        if (typeid(*(colliding_items[i])) == typeid(NormalBrick)) {
+            NormalBrick *ordinaryItem = dynamic_cast<NormalBrick *>(colliding_items[i]);
+            qreal rightMushroom = x() + pixmap().width();
+            qreal bottomMushroom = y() + pixmap().height();
+            qreal rightItem = ordinaryItem->x() + ordinaryItem->pixmap().width();
+            qreal bottomItem = ordinaryItem->y() + ordinaryItem->pixmap().height();
+            // top collsion
+            if (velocityY > 0 && bottomMushroom < bottomItem){
+                setPos(x(), ordinaryItem->y() - pixmap().height());
+                velocityY = 0;
+                onBrick = true;
+                break;
+            }
+            // side collision
+            if (x() < rightItem || rightMushroom > ordinaryItem->x()){
+                velocityX = -velocityX; // change direction
+            }
+        }
+        if (typeid(*(colliding_items[i])) == typeid(FloorBrick)) {
+            FloorBrick *ordinaryItem = dynamic_cast<FloorBrick *>(colliding_items[i]);
+            qreal rightMushroom = x() + pixmap().width();
+            qreal bottomMushroom = y() + pixmap().height();
+            qreal rightItem = ordinaryItem->x() + ordinaryItem->pixmap().width();
+            qreal bottomItem = ordinaryItem->y() + ordinaryItem->pixmap().height();
+            // top collsion
+            if (velocityY > 0 && bottomMushroom < bottomItem){
+                setPos(x(), ordinaryItem->y() - pixmap().height());
+                velocityY = 0;
+                onBrick = true;
+                break;
+            }
+            // side collision
+            if (x() < rightItem || rightMushroom > ordinaryItem->x()){
+                velocityX = -velocityX; // change direction
+            }
+        }
+    }
+
+    if (y() >= 519){
+        if ((x() >= 2450 && x() <= 2500) ||
+            (x() >= 3450 && x() <= 3500) ||
+            (x() >= 4300 && x() <= 4350) ){
+            scene()->removeItem(this);
+            moveTimer->stop();
             delete this;
             return;
         }
     }
 
-    setPos(x() + 3 * direction, y());
+    if (!onBrick) {
+        velocityY += 1;  // 增加垂直速度
+    }
+
+    setPos(x() + velocityX, y() + velocityY);
     return;
 }
 
-void SuperMushroom::advance(int phase){
-    if (!phase) return;
-    move();
-}
+/*
+bool SuperMushroom::standingBrick(){
+    if(this->y() + pixmap().height() >= 470){
+        if ((this->x() >= 2450 && this->x() <= 2500) ||
+            (this->x() >= 3450 && this->x() <= 3500) ||
+            (this->x() >= 4300 && this->x() <= 4350) ){
+            return false;
+        }
+    }
+    for(int i=0 ; i<BoxBrick::BoxBricks.length() ; i++){
+        qDebug()<<"Finding box"<<t++;
+        BoxBrick *boxbrick = BoxBrick::BoxBricks[i];
+        if (boxbrick->y() > y()){
+            qDebug()<<"above some bricks"<<t++;
+            if (boxbrick->x() + boxbrick->pixmap().width() < x() || boxbrick->x() > x()){
+                qDebug()<<"found";
+                return false;
+            }
+        }
+    }
+    return true;
+}*/

@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
+#include <QDebug>
 
 Player::Player(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
@@ -99,9 +100,11 @@ void Player::jumpStep() {
             if (x() < boxbrick->x() + boxbrick->pixmap().width() && x() + pixmap().width() > boxbrick->x()) {
                 if (x() < boxbrick->x()) {
                     setPos(boxbrick->x() - pixmap().width(), y());
+                    qDebug()<<"hit left";
                 }
                 else {
                     setPos(boxbrick->x() + boxbrick->pixmap().width(), y());
+                    qDebug()<<"hit right";
                 }
             }
         }
@@ -117,7 +120,7 @@ void Player::jumpStep() {
                 velocity = 0;
                 setPos(x(), buttomBrick);
                 jumpTimer->stop(); // stop jumping
-                brokenbrick->breakBrick(); // broken brick disappear
+                brokenbrick->breakBrick(brokenbrick); // broken brick disappear
                 jumpStep(); // start to fall
                 break;
             }

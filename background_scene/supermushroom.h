@@ -10,22 +10,22 @@ class SuperMushroom : public QObject, public QGraphicsPixmapItem{
 public:
     explicit SuperMushroom(QGraphicsItem *parent = nullptr);
     void setBounce(qreal boxBrickY);
+    QRectF boundingRect() const override;
+    QRectF getMushroomRect() const;
 
 public slots:
     void move();
-
-protected:
-    void advance(int phase);
 
 private:
     qreal initialY; // initial Y position
     qreal finalY; // landing Y position
     qreal bounceHeight; // bounce height limit
     qreal bounceStep;
+    qreal velocityX; // 3(default): move right 3px; -3: move left 3px
+    qreal velocityY;
+    bool onBrick; // true(default): mushroom is on bricks
     QTimer *bounceTimer;
     QTimer *moveTimer;
-    int direction = 1;  // 1 表示向右移動，-1 表示向左移動
-
 private slots:
     void bounce();
 };
