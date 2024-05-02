@@ -4,12 +4,14 @@ debug/castle.o
 debug/coin.o
 debug/fireflower.o
 debug/floorbrick.o
+debug/health.o
 debug/main.o
 debug/mainwindow.o
 debug/normalbrick.o
 debug/player.o
 debug/score.o
 debug/supermushroom.o
+debug/toxicmushroom.o
 debug/waterpipe.o
 debug/qrc_background_scene_resource.o
 debug/moc_boxbrick.o
@@ -21,4 +23,5 @@ debug/moc_mainwindow.o
 debug/moc_normalbrick.o
 debug/moc_player.o
 debug/moc_supermushroom.o
+debug/moc_toxicmushroom.o
 debug/moc_waterpipe.o

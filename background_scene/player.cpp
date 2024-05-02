@@ -5,6 +5,8 @@
 #include "coin.h"
 #include "score.h"
 #include "supermushroom.h"
+#include "toxicmushroom.h"
+#include "fireflower.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
@@ -14,18 +16,35 @@ Player::Player(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
     jumpTimer(new QTimer(this)),
     velocity(0), // initial velocity
-    maxHeight(100), // maximum jumping height
     isJumping(false),
-    isBig(false)
+    isBig(false),
+    bullet(0)
 {
     setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png")); // set initial mario pose
     connect(jumpTimer, &QTimer::timeout, this, &Player::jumpStep);
 }
 
 void Player::grow() {
+    ////new for health////
+    //Health::increasement();
+    //////////////////////
     if (!isBig) {
+        if(!isJumping){
+            setPos(x(), y()-35); // reset player's position so that not to be in ground
+        }
         setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
         isBig = true;
+    }
+}
+
+void Player::shrink() {
+    if (isBig) {
+        if(!isJumping){
+            //setting player's position so that not to be in air
+            setPos(x(), y()+35);
+        }
+        setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
+        isBig = false;
     }
     return;
 }
@@ -187,18 +206,46 @@ void Player::jumpStep() {
             Score::getInstance()->increase(); // score + 1
         }
 
-        // collided with Super Mushroom
-        if(typeid(*(colliding_items[i])) == typeid(SuperMushroom)) {
+        // collided with toxic mushroom
+        if (typeid(*(colliding_items[i])) == typeid(ToxicMushroom)) {
+            ToxicMushroom *toxicmushroom = dynamic_cast<ToxicMushroom *>(colliding_items[i]);
+            // jump onto toxic mushroom
+            if (isJumping && y() + pixmap().height() > toxicmushroom->y()) {
+                toxicmushroom->breakToxicMushroom();
+                break;
+            }
+
+        }
+
+        // collided with fire flower
+        if(typeid(*(colliding_items[i])) == typeid(FireFlower)) {
+            FireFlower *fireflower = dynamic_cast<FireFlower*>(colliding_items[i]);
+            scene()->removeItem(fireflower); // delete the fire flower
+            delete fireflower;
+
             grow();
+            bullet = 3; // reset player with 3 ammos
+            qDebug()<<"bullet"<<bullet;
         }
     }
 
-    // 检查是否完成跳跃（是否回到了初始高度或更低）
-    if (pos().y() > 470) {
-        jumpTimer->stop();
-        setPos(x(), 470); // 重置到地面
-        isJumping = false; // 结束跳跃
-        velocity = 0; // 重置速度
+    // check fall to the ground
+    if(!isBig){
+        if (pos().y() > 470) {
+            jumpTimer->stop();
+            setPos(x(), 470);
+            isJumping = false;
+            velocity = 0;
+        }
+
+    }
+    if(isBig){
+        if (pos().y() > 435) {
+            jumpTimer->stop();
+            setPos(x(), 435);
+            isJumping = false;
+            velocity = 0;
+        }
     }
     return;
 }

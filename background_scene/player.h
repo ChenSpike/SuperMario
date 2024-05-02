@@ -12,12 +12,14 @@ public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
     void grow();
+    void shrink();
+    bool isJumping; // state of jumping
 private:
     QTimer* jumpTimer;
     int velocity; // initial velocity
-    int maxHeight; // maximum jumping height
-    bool isJumping; // state of jumping
-    bool isBig; // state of big or small
+    bool isBig; //  true:big ; false:small(default)
+    int bullet; // 0(default)
+
 private slots:
     void jumpStep();
 };

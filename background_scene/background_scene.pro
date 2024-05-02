@@ -15,12 +15,14 @@ SOURCES += \
     coin.cpp \
     fireflower.cpp \
     floorbrick.cpp \
+    health.cpp \
     main.cpp \
     mainwindow.cpp \
     normalbrick.cpp \
     player.cpp \
     score.cpp \
     supermushroom.cpp \
+    toxicmushroom.cpp \
     waterpipe.cpp
 
 HEADERS += \
@@ -31,11 +33,13 @@ HEADERS += \
     fireflower.h \
     floorbrick.h \
     game.h \
+    health.h \
     mainwindow.h \
     normalbrick.h \
     player.h \
     score.h \
     supermushroom.h \
+    toxicmushroom.h \
     waterpipe.h
 
 FORMS += \
