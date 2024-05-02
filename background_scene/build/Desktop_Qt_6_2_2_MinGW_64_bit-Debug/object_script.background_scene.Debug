@@ -1,5 +1,6 @@
 debug/boxbrick.o
 debug/brokenbrick.o
+debug/bullet.o
 debug/castle.o
 debug/coin.o
 debug/fireflower.o
@@ -15,6 +16,7 @@ debug/toxicmushroom.o
 debug/waterpipe.o
 debug/qrc_background_scene_resource.o
 debug/moc_boxbrick.o
+debug/moc_bullet.o
 debug/moc_coin.o
 debug/moc_brokenbrick.o
 debug/moc_fireflower.o

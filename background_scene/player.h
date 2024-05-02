@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <QGraphicsSceneMouseEvent>>
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
@@ -14,12 +15,12 @@ public:
     void grow();
     void shrink();
     bool isJumping; // state of jumping
+    void shoot(QPointF targetPos);
 private:
     QTimer* jumpTimer;
     int velocity; // initial velocity
     bool isBig; //  true:big ; false:small(default)
     int bullet; // 0(default)
-
 private slots:
     void jumpStep();
 };

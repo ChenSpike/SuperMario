@@ -4,9 +4,9 @@
 #include "normalbrick.h"
 #include "coin.h"
 #include "score.h"
-#include "supermushroom.h"
 #include "toxicmushroom.h"
 #include "fireflower.h"
+#include "bullet.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
@@ -14,9 +14,9 @@
 
 Player::Player(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
+    isJumping(false),
     jumpTimer(new QTimer(this)),
     velocity(0), // initial velocity
-    isJumping(false),
     isBig(false),
     bullet(0)
 {
@@ -81,10 +81,28 @@ void Player::keyPressEvent(QKeyEvent *event){
     return;
 }
 
+void Player::shoot(QPointF targetPos) {
+    if (bullet > 0) {
+        QPointF target = mapToScene(targetPos);
+        QPointF start = mapToScene(boundingRect().center()); // Start from player's center
+        Bullet *fireball = new Bullet();
+        fireball->setAngle(start, target);
+        scene()->addItem(fireball);
+        bullet--;
+        qDebug()<<"remaining bullet:"<<bullet;
+    }
+    return;
+}
+
 void Player::jumpStep() {
     setPos(x(), y() + velocity);
     jumpTimer->start(20);
     velocity += 1; // 模拟重力影响
+
+    // no jumping during falling
+    if (velocity > 0 && !isJumping){
+        isJumping = true;
+    }
 
     // get the item collided with the player
     QList<QGraphicsItem* > colliding_items = collidingItems();

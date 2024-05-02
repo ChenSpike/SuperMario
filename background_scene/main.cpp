@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "score.h"
 #include "floorbrick.h"
-#include "stonebrick.h"
 #include "normalbrick.h"
 #include "game.h"
 #include "boxbrick.h"
@@ -22,7 +21,10 @@
 #include <QBrush>
 #include <QImage>
 #include <QLabel>
+#include <QMouseEvent>
 #include <QDebug>
+
+void mousePressEvent(QMouseEvent *event);
 
 int main(int argc, char *argv[])
 {
@@ -96,9 +98,14 @@ int main(int argc, char *argv[])
         view -> move(0,0); // view position
         view -> show();
         ////////////////////////////////////////////////////////////
+
     });
 
     start.exec(); //show the start dialog
 
     return a.exec();
+}
+
+void mousePressEvent(QMouseEvent *event){
+    qDebug()<<"left click";
 }

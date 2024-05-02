@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     boxbrick.cpp \
     brokenbrick.cpp \
+    bullet.cpp \
     castle.cpp \
     coin.cpp \
     fireflower.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     boxbrick.h \
+    bullet.h \
     castle.h \
     coin.h \
     brokenbrick.h \

@@ -1,5 +1,6 @@
 release/boxbrick.o
 release/brokenbrick.o
+release/bullet.o
 release/castle.o
 release/coin.o
 release/fireflower.o
@@ -15,6 +16,7 @@ release/toxicmushroom.o
 release/waterpipe.o
 release/qrc_background_scene_resource.o
 release/moc_boxbrick.o
+release/moc_bullet.o
 release/moc_coin.o
 release/moc_brokenbrick.o
 release/moc_fireflower.o
