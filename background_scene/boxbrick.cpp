@@ -3,8 +3,6 @@
 #include "coin.h"
 #include "fireflower.h"
 #include "supermushroom.h"
-#include <QGraphicsScene>
-#include <QPixmap>
 
 QVector<BoxBrick*> BoxBrick::BoxBricks;
 
@@ -17,6 +15,10 @@ BoxBrick::BoxBrick(ItemType type, QGraphicsItem *parent):
     initialY(0)
 {
     setPixmap(QPixmap(":/new/dataset/dataset/box brick.png")); // Set box brick image
+    // create a rectangle of size 50x50
+    boxbrickRect = QRect(0, 0, pixmap().width(), pixmap().height());
+    setPos(boxbrickRect.center() - QPointF(pixmap().width() / 2, pixmap().height() / 2));
+
     connect(bounceTimer, &QTimer::timeout, this, &BoxBrick::bounce); // connect bounce timer to bounce
 }
 
@@ -65,6 +67,11 @@ void BoxBrick::CreateBoxBricks(QGraphicsScene* scene){
         scene -> addItem(newBoxBrick);
         BoxBricks.append(newBoxBrick);
     }
+    // test for mushroom falling
+    // newBoxBrick = new BoxBrick();
+    // newBoxBrick -> setPos(950,470);
+    // scene -> addItem(newBoxBrick);
+    // BoxBricks.append(newBoxBrick);
     return;
 }
 
@@ -113,7 +120,7 @@ void BoxBrick::createItem(){
     case SUPERMUSHROOM: {
         SuperMushroom *superMushroom = new SuperMushroom();
         qreal bounceStartY = this->y() - superMushroom->boundingRect().height();
-        qreal bounceEndY = initialY - this->boundingRect().height();
+        qreal bounceEndY = initialY - superMushroom->boundingRect().height();
         superMushroom->setPos(this->x(), bounceStartY);
         scene()->addItem(superMushroom);
         superMushroom->setBounce(bounceEndY);
@@ -122,7 +129,7 @@ void BoxBrick::createItem(){
     case FIREFLOWER: {
         FireFlower *fireFlower = new FireFlower();
         qreal bounceStartY = this->y() - fireFlower->boundingRect().height();
-        qreal bounceEndY = initialY - this->boundingRect().height();
+        qreal bounceEndY = initialY - fireFlower->boundingRect().height();
         fireFlower->setPos(this->x(), bounceStartY);
         scene()->addItem(fireFlower);
         fireFlower->setBounce(bounceEndY);

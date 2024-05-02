@@ -2,6 +2,7 @@
 #define BOXBRICK_H
 
 #include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
 #include <QObject>
 #include <QTimer>
 
@@ -17,6 +18,7 @@ public:
     BoxBrick(ItemType type = COIN, QGraphicsItem *parent = nullptr);
     static void CreateBoxBricks(QGraphicsScene* scene);
     static QVector<BoxBrick*> BoxBricks;
+    QRectF boxbrickRect;
     void handleCollision(); // handle collision
 private:
     ItemType itemType;
@@ -26,6 +28,7 @@ private:
     qreal initialY; // initial y position of the normal brick
     void setBounce();
     void createItem(); // Create an item above a box brick
+
 private slots:
     void bounce();
 };

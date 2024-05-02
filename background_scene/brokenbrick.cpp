@@ -29,12 +29,28 @@ void BrokenBrick::CreateBrokenBricks(QGraphicsScene *scene){
         scene -> addItem(newBrokenBrick);
         BrokenBricks.append(newBrokenBrick);
     }
+
+    // test for mushroom
+    // newBrokenBrick = new BrokenBrick(BrokenBrickImage);
+    // newBrokenBrick -> setPos(950,470);
+    // scene -> addItem(newBrokenBrick);
+    // BrokenBricks.append(newBrokenBrick);
+
     return;
 }
 
-void BrokenBrick::breakBrick(){
+void BrokenBrick::breakBrick(BrokenBrick *brokenbrick){
     // delete the break brick
-    scene()->removeItem(this);
+    scene()->removeItem(brokenbrick);
+    QVector<BrokenBrick*>::iterator i = BrokenBricks.begin();
+    while(i != BrokenBricks.end()){
+        if(*i == brokenbrick){
+            i = BrokenBricks.erase(i);
+        }
+        else{
+            i++;
+        }
+    }
     delete this;
     return;
 }

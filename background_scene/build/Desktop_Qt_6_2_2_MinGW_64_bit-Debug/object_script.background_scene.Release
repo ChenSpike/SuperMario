@@ -16,6 +16,7 @@ release/moc_boxbrick.o
 release/moc_coin.o
 release/moc_brokenbrick.o
 release/moc_fireflower.o
+release/moc_floorbrick.o
 release/moc_mainwindow.o
 release/moc_normalbrick.o
 release/moc_player.o
