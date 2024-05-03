@@ -2,21 +2,29 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
+#include <QGraphicsView>
+#include "player.h"
+#include "score.h"
 #include <QMouseEvent>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
+    Player *mario = nullptr;
+    QGraphicsView *view = nullptr;
+    QGraphicsScene *scene = nullptr;
+    Score *score = nullptr;
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    void CreateElements();
+    static void GameOver();
+    bool isMarioMoving;
     void mousePressEvent(QMouseEvent *event);
+    // void SetScrollEvent();
+    ~MainWindow();
+public slots:
+    void ScrollEvent();
+
 private:
-    Ui::MainWindow *ui;
-    QGraphicsScene *scene;
+
 };
 #endif // MAINWINDOW_H
