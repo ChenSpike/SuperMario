@@ -58,61 +58,66 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(startbutton, &QPushButton::clicked, [=]() {
         // 觸發完click後，關閉start screen
         start->close();
-        CreateElements();
+        //CreateElements();
+        game = new Game();
     });
 
     start->exec(); // show the start dialog
 }
 
 void MainWindow::CreateElements() {
-    //////////////////// create background scene ////////////////////
-    //create a scene
-    scene = new QGraphicsScene();
-    scene->setSceneRect(0, 0, 7000, 619);
-    // StartScreen();
-    // load background image
-    QPixmap pixmap(":/new/dataset/dataset/background_7000pixel.png");
-    //"":insert image's path
-    // add the image to the scene
-    QGraphicsPixmapItem* background = scene ->addPixmap(pixmap);
+    // //////////////////// create background scene ////////////////////
+    // //create a scene
+    // scene = new QGraphicsScene();
+    // scene->setSceneRect(0, 0, 7000, 619);
 
+    // /// concise codes ///
+    // // set the background image
+    // QPixmap backgroundImage(":/new/dataset/dataset/background_7000pixel.png");
+    // scene->addPixmap(backgroundImage);
+    // /////////////////////
 
-    // create coins
-    Coin::CreateCoins(scene);
-    // create the score
-    score = new Score;
-    scene -> addItem(score);
-    //add castle
-    Castle::CreateCastle(scene);
-    ///////////////////////////////////////////////////////////
+    // // create coins
+    // Coin::CreateCoins(scene);
+    // // create the score
+    // score = new Score;
+    // scene -> addItem(score);
+    // //add castle
+    // Castle::CreateCastle(scene);
+    // ///////////////////////////////////////////////////////////
 
-    //////////////////// create the player ////////////////////
-    mario = new Player();
-    mario->setPos(250,470); // TODO generalize to always be in the middle bottom of screen
-    // make the player focusable and set it to be the current focus
-    mario->setFlag(QGraphicsItem::ItemIsFocusable);
-    mario->setFocus();
-    scene ->addItem(mario);
-    ///////////////////////////////////////////////////////////
+    // //////////////////// create the player ////////////////////
+    // mario = new Player();
+    // mario->setPos(250,470); // TODO generalize to always be in the middle bottom of screen
+    // // make the player focusable and set it to be the current focus
+    // mario->setFlag(QGraphicsItem::ItemIsFocusable);
+    // mario->setFocus();
+    // scene ->addItem(mario);
+    // ///////////////////////////////////////////////////////////
 
-    //////////////////// create bricks and pipes ////////////////////
-    FloorBrick::CreateFloorBricks(scene); // floor bricks
-    BoxBrick::CreateBoxBricks(scene); // box bricks
-    BrokenBrick::CreateBrokenBricks(scene); // broken bricks
-    NormalBrick::CreateNormalBricks(scene); //normal bricks without coins
-    WaterPipe::CreateWaterPipes(scene); // water pipes
-    /////////////////////////////////////////////////////////////////
+    // //////////////////// create bricks and pipes ////////////////////
+    // FloorBrick::CreateFloorBricks(scene); // floor bricks
+    // BoxBrick::CreateBoxBricks(scene); // box bricks
+    // BrokenBrick::CreateBrokenBricks(scene); // broken bricks
+    // NormalBrick::CreateNormalBricks(scene); //normal bricks without coins
+    // WaterPipe::CreateWaterPipes(scene); // water pipes
+    // /////////////////////////////////////////////////////////////////
+
+    ///test game.h
+    game = new Game();
+    //game->show();
+    ///
 
     //////////////////// view //////////////////////////////////
     // visualize (view)
-    view = new QGraphicsView(scene);
+    view = new QGraphicsView(game->scene); //game
     // Disable scroll bars
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // set the view size and initial position: (0,0)
     view->setFixedSize(1400,619);
-    view->setSceneRect(scene->sceneRect());
+    view->setSceneRect(game->scene->sceneRect()); //game
     view->horizontalScrollBar()->setValue(0);
     view->viewport()->scroll(-2000,0);
     qDebug()<<"moving back";
@@ -131,8 +136,8 @@ void MainWindow::ScrollEvent() {
     int leftValue = view->horizontalScrollBar()->value();
     int viewWidth = view->viewport()->width();
     int viewCenterX = leftValue + viewWidth / 2;
-    QRectF marioRect = mario->boundingRect();
-    int playerCenterX = mario->pos().x() + marioRect.width() / 2;
+    QRectF marioRect = game->mario->boundingRect(); //game
+    int playerCenterX = game->mario->pos().x() + marioRect.width() / 2; //game
     int scrollThreshold = viewWidth / 18; // 讓mario維持在畫面中間
     int scrollSpeed = 50; // 捲軸移動速度
 
@@ -153,7 +158,7 @@ void MainWindow::ScrollEvent() {
 
     }
     //hp->setPos(view->horizontalScrollBar()->value()+100,10);
-    score->setPos(view->horizontalScrollBar()->value()+50,10);
+    //score->setPos(view->horizontalScrollBar()->value()+50,10);
     // else if (leftValue == 0){
     //     view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     //     view->horizontalScrollBar()->setValue(0);
@@ -175,12 +180,16 @@ void MainWindow::GameOver(){
     return;
 }
 
-int c=0;
-void MainWindow::mousePressEvent(QMouseEvent *event){
-    qDebug()<<"click"<<c++;
-}
+// void MainWindow::mousePressEvent(QMouseEvent *event){
+//     game->mario->mousePressEvent(event);
+// }
+
+// void MainWindow::keyPressEvent(QKeyEvent *event){
+//     game->mario->keyPressEvent(event);
+// }
 
 MainWindow::~MainWindow()
 {
 }
+
 

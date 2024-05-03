@@ -7,6 +7,7 @@
 #include "toxicmushroom.h"
 #include "fireflower.h"
 #include "bullet.h"
+#include "waterpipe.h"
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
@@ -15,6 +16,7 @@
 Player::Player(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
     isJumping(false),
+    stepX(25),
     jumpTimer(new QTimer(this)),
     velocity(0), // initial velocity
     isBig(false),
@@ -55,7 +57,7 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPixmap(QPixmap(":/new/dataset/dataset/mario_L_run1.png"));
         else
             setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
-        setPos(x()-25, y());
+        setPos(x()-stepX, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
@@ -65,7 +67,7 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
         else
             setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
-        setPos(x()+25, y());
+        setPos(x()+stepX, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
@@ -79,6 +81,11 @@ void Player::keyPressEvent(QKeyEvent *event){
         jumpTimer->start(20);
     }
     return;
+}
+
+int c=0;
+void Player::mousePressEvent(QMouseEvent *event){
+    qDebug()<<"click in player"<<c++;
 }
 
 void Player::shoot(QPointF targetPos) {
@@ -212,6 +219,30 @@ void Player::jumpStep() {
                 }
                 else {
                     setPos(normalbrick->x() + normalbrick->pixmap().width(), y());
+                }
+            }
+        }
+
+        // collided with Water Pipe
+        if(typeid(*(colliding_items[i])) == typeid(WaterPipe)){
+            WaterPipe *waterpipe = dynamic_cast<WaterPipe *>(colliding_items[i]);
+
+            // landing on the top
+            if (velocity > 0 && pos().y() + pixmap().height() < waterpipe->y() + waterpipe->pixmap().height()) {
+                setPos(x(), waterpipe->y() - pixmap().height());
+                velocity = 0;
+                isJumping = false;
+                jumpTimer->stop();
+                break;
+            }
+
+            // side collisions
+            if (x() < waterpipe->x() + waterpipe->pixmap().width() && x() + pixmap().width() > waterpipe->x()) {
+                if (x() < waterpipe->x()) {
+                    setPos(waterpipe->x() - pixmap().width(), y());
+                }
+                else {
+                    setPos(waterpipe->x() + waterpipe->pixmap().width(), y());
                 }
             }
         }

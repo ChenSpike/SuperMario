@@ -5,6 +5,7 @@ debug/castle.o
 debug/coin.o
 debug/fireflower.o
 debug/floorbrick.o
+debug/game.o
 debug/health.o
 debug/main.o
 debug/mainwindow.o
@@ -13,6 +14,7 @@ debug/player.o
 debug/score.o
 debug/supermushroom.o
 debug/toxicmushroom.o
+debug/view.o
 debug/waterpipe.o
 debug/qrc_background_scene_resource.o
 debug/moc_boxbrick.o
