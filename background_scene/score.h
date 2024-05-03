@@ -11,7 +11,6 @@ public:
     static Score* getInstance();
 public slots:
     void increase();
-//    void advance(int phase); score跟著遊戲畫面一起動(未完成)
 private:
     int score;
     static Score* instance;

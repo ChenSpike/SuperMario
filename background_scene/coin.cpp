@@ -1,7 +1,7 @@
 #include "coin.h"
 #include <QPixmap>
 
-QVector<Coin*> Coin::vCoin;
+QVector<Coin*> Coin::Coins;
 
 Coin::Coin(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
@@ -20,8 +20,26 @@ void Coin::CreateCoins(QGraphicsScene* scene){
         Coin* newCoin = new Coin();
         newCoin -> setPos(position[i] * 50, 350);
         scene -> addItem(newCoin);
-        vCoin.append(newCoin);
+        Coins.append(newCoin);
     }
+    return;
+}
+
+void Coin::deleteCoin(Coin *coin){
+    // delete the coin
+    scene()->removeItem(coin);
+    QVector<Coin*>::iterator i = Coins.begin();
+    while(i != Coins.end()){
+        if(*i == coin){
+            qDebug()<<"found the coin";
+            i = Coins.erase(i);
+        }
+        else{
+            i++;
+        }
+    }
+    qDebug()<<"coins length:"<<Coins.length();
+    delete coin;
     return;
 }
 

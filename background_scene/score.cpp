@@ -18,6 +18,7 @@ Score* Score::getInstance() {
 }
 
 void Score::increase(){
+    qDebug()<<"increase";
     score++;
     setPlainText(QString("Score: ") + QString::number(score));
 }
@@ -26,15 +27,3 @@ void Score::increase(){
 int Score::getScore() const{
     return score;
 }
-
-/*
-void Score::advance(int phase){
-    // 在场景更新时，将Score对象的位置设置为视图的左上角
-    if (!phase) {
-        QGraphicsView *view = qobject_cast<QGraphicsView *>(scene()->views().first());
-        if (view) {
-            QPointF viewTopLeft = view->mapToScene(0, 0);
-            setPos(viewTopLeft);
-        }
-    }
-}*/

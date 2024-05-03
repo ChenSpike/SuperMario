@@ -1,10 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <QMouseEvent>
 #include <QGraphicsPixmapItem>
-#include <QObject>
 #include <QGraphicsItem>
+#include <QKeyEvent>
+#include <QMouseEvent>
+#include <QObject>
 #include <QTimer>
 
 class Player:public QObject, public QGraphicsPixmapItem{
@@ -17,7 +18,9 @@ public:
     void shrink();
     bool isJumping; // state of jumping
     void shoot(QPointF targetPos);
-    int stepX;
+    qreal stepX;
+    qreal groundLevel;
+    int t=0;
 private:
     QTimer* jumpTimer;
     int velocity; // initial velocity

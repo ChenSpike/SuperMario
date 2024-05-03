@@ -2643,10 +2643,6 @@ release/game.o: ../../game.cpp ../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvector.h \
 		../../normalbrick.h \
 		../../waterpipe.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QScrollArea \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QScrollBar \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qscrollbar.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qabstractslider.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/QBrush
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\game.o ..\..\game.cpp
 
@@ -2795,9 +2791,9 @@ release/health.o: ../../health.cpp ../../health.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\health.o ..\..\health.cpp
 
-release/main.o: ../../main.cpp ../../mainwindow.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
+release/main.o: ../../main.cpp ../../game.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QWidget \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qglobal.h \
@@ -2822,7 +2818,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qversiontagging.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtgui-config.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnamespace.h \
@@ -2926,8 +2921,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/QTransform \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qicon.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsView \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsview.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainter.h \
@@ -2937,6 +2930,7 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
@@ -2948,9 +2942,6 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../score.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsTextItem \
-		../../game.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \

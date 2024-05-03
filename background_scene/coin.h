@@ -10,10 +10,11 @@ class Coin : public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Coin(QGraphicsItem *parent = nullptr);
-    static QVector<Coin*> vCoin;
+    static QVector<Coin*> Coins;
     static void CreateCoins(QGraphicsScene* scene);
     static int numberCoin;
     void setFly();
+    void deleteCoin(Coin *coin);
 private:
     qreal initialY; // initial Y position
     QTimer *flyTimer;

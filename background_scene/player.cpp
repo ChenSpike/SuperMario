@@ -9,7 +9,6 @@
 #include "bullet.h"
 #include "waterpipe.h"
 #include <QGraphicsScene>
-#include <QKeyEvent>
 #include <QList>
 #include <QDebug>
 
@@ -17,6 +16,7 @@ Player::Player(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
     isJumping(false),
     stepX(25),
+    groundLevel(470),
     jumpTimer(new QTimer(this)),
     velocity(0), // initial velocity
     isBig(false),
@@ -83,12 +83,12 @@ void Player::keyPressEvent(QKeyEvent *event){
     return;
 }
 
-int c=0;
 void Player::mousePressEvent(QMouseEvent *event){
-    qDebug()<<"click in player"<<c++;
+    shoot(event->pos());
 }
 
 void Player::shoot(QPointF targetPos) {
+    qDebug()<<"click pos:("<<targetPos.x()<<","<<targetPos.y()<<")";
     if (bullet > 0) {
         QPointF target = mapToScene(targetPos);
         QPointF start = mapToScene(boundingRect().center()); // Start from player's center
@@ -101,7 +101,9 @@ void Player::shoot(QPointF targetPos) {
     return;
 }
 
+
 void Player::jumpStep() {
+    //qDebug()<<t++;
     setPos(x(), y() + velocity);
     jumpTimer->start(20);
     velocity += 1; // 模拟重力影响
@@ -144,11 +146,11 @@ void Player::jumpStep() {
             if (x() < boxbrick->x() + boxbrick->pixmap().width() && x() + pixmap().width() > boxbrick->x()) {
                 if (x() < boxbrick->x()) {
                     setPos(boxbrick->x() - pixmap().width(), y());
-                    qDebug()<<"hit left";
+                    // qDebug()<<"hit left";
                 }
                 else {
                     setPos(boxbrick->x() + boxbrick->pixmap().width(), y());
-                    qDebug()<<"hit right";
+                    // qDebug()<<"hit right";
                 }
             }
         }
@@ -240,9 +242,11 @@ void Player::jumpStep() {
             if (x() < waterpipe->x() + waterpipe->pixmap().width() && x() + pixmap().width() > waterpipe->x()) {
                 if (x() < waterpipe->x()) {
                     setPos(waterpipe->x() - pixmap().width(), y());
+                    qDebug()<<"hit left";
                 }
                 else {
                     setPos(waterpipe->x() + waterpipe->pixmap().width(), y());
+                    qDebug()<<"hit right";
                 }
             }
         }
@@ -250,9 +254,9 @@ void Player::jumpStep() {
         // collided with Coin
         if (typeid(*(colliding_items[i])) == typeid(Coin)) {
             Coin *coin = dynamic_cast<Coin*>(colliding_items[i]);
-            scene()->removeItem(coin); // delete the coin
-            delete coin; // release memory
             Score::getInstance()->increase(); // score + 1
+            qDebug()<<"a coin";
+            coin->deleteCoin(coin);
         }
 
         // collided with toxic mushroom
@@ -273,25 +277,26 @@ void Player::jumpStep() {
             delete fireflower;
 
             grow();
+            groundLevel = 435;
             bullet = 3; // reset player with 3 ammos
             qDebug()<<"bullet"<<bullet;
         }
     }
 
-    // check fall to the ground
-    if(!isBig){
-        if (pos().y() > 470) {
+    // fall on the ground
+    if (y() > groundLevel) {
+        if ((x() < 2450 || x() > 2500) &&
+            (x() < 3450 || x() > 3500) &&
+            (x() < 4300 || x() > 4350) ){
+            setPos(x(), groundLevel);
             jumpTimer->stop();
-            setPos(x(), 470);
             isJumping = false;
             velocity = 0;
         }
-
-    }
-    if(isBig){
-        if (pos().y() > 435) {
+        else if (y() > groundLevel+pixmap().height()){
+            qDebug()<<"Die"<<t++;
+            setPos(x(), groundLevel+pixmap().height());
             jumpTimer->stop();
-            setPos(x(), 435);
             isJumping = false;
             velocity = 0;
         }
