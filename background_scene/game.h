@@ -1,12 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "player.h"
+#include "score.h"
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include "player.h"
-#include "score.h"
 #include <QMouseEvent>
+#include <QKeyEvent>
+#include <QDialog>
 
 class Game: public QGraphicsView{
 public:
@@ -16,6 +18,11 @@ public:
     Score *score;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
+public slots:
+    void closeStart();
+private:
+    QDialog* start;
+    void setStart();
 };
 
 #endif // GAME_H

@@ -8,10 +8,14 @@
 #include "waterpipe.h"
 #include <QObject>
 #include <QBrush>
+#include <QLabel>
+#include <QPushButton>
 
 using namespace std;
 
 Game::Game(QWidget *parent){
+    setStart(); // launch the start screen
+
     //////////////////// create background scene ////////////////////
     // create a scene
     scene = new QGraphicsScene();
@@ -48,23 +52,24 @@ Game::Game(QWidget *parent){
     BrokenBrick::CreateBrokenBricks(scene); // broken bricks
     NormalBrick::CreateNormalBricks(scene); // normal bricks w/ and w/o coins
     WaterPipe::CreateWaterPipes(scene); // water pipes
-    /////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////
 }
 
 void Game::mousePressEvent(QMouseEvent *event){
     mario->mousePressEvent(event);
+    return;
 }
 
 void Game::keyPressEvent(QKeyEvent *event){
     mario->keyPressEvent(event);
-    qreal marioWidth = mario->pixmap().width();
+    qreal marioMidPos = mario->x() + (mario->pixmap().width())/2;
     auto rect = scene->sceneRect();
     if (mario->x() < rect.x()){
         mario->setPos(rect.x(), mario->y());
         return;
     }
-    if (mario->x() + marioWidth/2 > 700 && mario->x() < 6300){
-        if (mario->x() - rect.x() > 700){
+    if (marioMidPos > 700 && marioMidPos < 6300){
+        if (marioMidPos - rect.x() > 700){
             // view shift right
             rect.translate(mario->stepX,0);
             scene->setSceneRect(rect);
@@ -73,4 +78,32 @@ void Game::keyPressEvent(QKeyEvent *event){
         }
     }
     return;
+}
+
+void Game::setStart(){
+    //////////////////// create start screen ////////////////////
+    // Create start window
+    start = new QDialog();
+    start->setWindowTitle("Start the Game");
+
+    // Add Start Screen Image
+    QPixmap startscreenimage(":/new/dataset/dataset/start_screen.png");
+    QLabel* startlabel = new QLabel(start);
+    startlabel->setPixmap(startscreenimage);
+    startlabel->setGeometry(0, 0, startscreenimage.width(), startscreenimage.height());
+
+    // Push button to start the game
+    QPushButton* startbutton = new QPushButton("", start);
+    QPixmap startbuttonimage(":/new/dataset/dataset/start_btn.png");
+    startbutton->setIcon(QIcon(startbuttonimage));
+    startbutton->setIconSize(startbuttonimage.size()); // icon 和 screen 的照片設置方法不一樣
+    startbutton->setGeometry(435, 455, startbuttonimage.width(), startbuttonimage.height());
+
+    // start button is trigged by mouse click
+    QObject::connect(startbutton, &QPushButton::clicked, this, &Game::closeStart);
+    start->exec(); // show the start dialog
+}
+
+void Game::closeStart(){
+    start->close(); // After clicking, close the start screen
 }

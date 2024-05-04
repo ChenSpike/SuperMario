@@ -1061,11 +1061,12 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -1074,6 +1075,8 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QDialog \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		release/moc_predefs.h \
 		C:/Qt6/6.2.2/mingw_64/bin/moc.exe
 	C:\Qt6\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/OliverNotebook/Desktop/SuperMario/background_scene/build/Desktop_Qt_6_2_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt6/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/OliverNotebook/Desktop/SuperMario/background_scene -IC:/Qt6/6.2.2/mingw_64/include -IC:/Qt6/6.2.2/mingw_64/include/QtWidgets -IC:/Qt6/6.2.2/mingw_64/include/QtGui -IC:/Qt6/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
@@ -1191,8 +1194,9 @@ release/moc_normalbrick.cpp: ../../normalbrick.h \
 	C:\Qt6\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/OliverNotebook/Desktop/SuperMario/background_scene/build/Desktop_Qt_6_2_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt6/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/OliverNotebook/Desktop/SuperMario/background_scene -IC:/Qt6/6.2.2/mingw_64/include -IC:/Qt6/6.2.2/mingw_64/include/QtWidgets -IC:/Qt6/6.2.2/mingw_64/include/QtGui -IC:/Qt6/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt6/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt6/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\normalbrick.h -o release\moc_normalbrick.cpp
 
 release/moc_player.cpp: ../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qevent.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
@@ -1215,9 +1219,15 @@ release/moc_player.cpp: ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnumeric.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qversiontagging.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtgui-config.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcoreevent.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobject.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnamespace.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtmetamacros.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstring.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qchar.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbytearray.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qrefcount.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qarraydata.h \
@@ -1227,14 +1237,6 @@ release/moc_player.cpp: ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcontainertools_impl.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbytearrayview.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevice.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevicebase.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobject.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstring.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qchar.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringliteral.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringalgorithms.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qanystringview.h \
@@ -1248,12 +1250,14 @@ release/moc_player.cpp: ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringlist.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringmatcher.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qscopedpointer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmetatype.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcompare.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qscopeguard.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevicebase.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiterable.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmetacontainer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcontainerinfo.h \
@@ -1264,10 +1268,6 @@ release/moc_player.cpp: ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qshareddata.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpropertyprivate.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qurl.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvariant.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmap.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qshareddata_impl.h \
@@ -1277,13 +1277,35 @@ release/moc_player.cpp: ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qset.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcontiguouscache.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qeventpoint.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvector2d.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvectornd.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpoint.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qrect.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmargins.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsize.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpoint.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtransform.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpolygon.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qregion.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qline.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixmap.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpaintdevice.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qcolor.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgb.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgba64.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qimage.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixelformat.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qevent.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevice.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpointer.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qurl.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qeventpoint.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvector2d.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvectornd.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpointingdevice.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qinputdevice.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qscreen.h \
@@ -1293,28 +1315,10 @@ release/moc_player.cpp: ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QSize \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QSizeF \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/QTransform \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtransform.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpolygon.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qregion.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qline.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qkeysequence.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixmap.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpaintdevice.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qcolor.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgb.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgba64.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qimage.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixelformat.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -2624,16 +2628,19 @@ release/game.o: ../../game.cpp ../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../score.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsTextItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QDialog \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		../../coin.h \
 		../../castle.h \
 		../../floorbrick.h \
@@ -2643,7 +2650,15 @@ release/game.o: ../../game.cpp ../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvector.h \
 		../../normalbrick.h \
 		../../waterpipe.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QBrush
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QBrush \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpicture.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\game.o ..\..\game.cpp
 
 release/health.o: ../../health.cpp ../../health.h \
@@ -2932,16 +2947,19 @@ release/main.o: ../../main.cpp ../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../score.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsTextItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QDialog \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
@@ -2961,7 +2979,15 @@ release/main.o: ../../main.cpp ../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpicture.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\main.cpp
 
 release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -3107,11 +3133,12 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -3120,6 +3147,8 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../game.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QDialog \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QScrollArea \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QScrollBar \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qscrollbar.h \
@@ -3154,8 +3183,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QDialog \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
@@ -3289,8 +3316,9 @@ release/normalbrick.o: ../../normalbrick.cpp ../../normalbrick.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\normalbrick.o ..\..\normalbrick.cpp
 
 release/player.o: ../../player.cpp ../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qevent.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtguiglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qglobal.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
@@ -3313,9 +3341,15 @@ release/player.o: ../../player.cpp ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnumeric.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qversiontagging.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtgui-config.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcoreevent.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobject.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnamespace.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtmetamacros.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstring.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qchar.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbytearray.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qrefcount.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qarraydata.h \
@@ -3325,14 +3359,6 @@ release/player.o: ../../player.cpp ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcontainertools_impl.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbytearrayview.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevice.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevicebase.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qobject.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstring.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qchar.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringview.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringliteral.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringalgorithms.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qanystringview.h \
@@ -3346,12 +3372,14 @@ release/player.o: ../../player.cpp ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringlist.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringmatcher.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcoreevent.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qscopedpointer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmetatype.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcompare.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qscopeguard.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevicebase.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiterable.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmetacontainer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcontainerinfo.h \
@@ -3362,10 +3390,6 @@ release/player.o: ../../player.cpp ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qshareddata.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpropertyprivate.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qurl.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvariant.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmap.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qshareddata_impl.h \
@@ -3375,13 +3399,35 @@ release/player.o: ../../player.cpp ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qstringconverter.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qset.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qcontiguouscache.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qeventpoint.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvector2d.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvectornd.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpoint.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qrect.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qmargins.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qsize.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpoint.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtransform.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpolygon.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qregion.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qline.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixmap.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpaintdevice.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qcolor.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgb.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgba64.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qimage.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixelformat.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qevent.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevice.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpointer.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtCore/qurl.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qeventpoint.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvector2d.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/qvectornd.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpointingdevice.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qinputdevice.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qscreen.h \
@@ -3391,28 +3437,10 @@ release/player.o: ../../player.cpp ../../player.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QSize \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QSizeF \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/QTransform \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qtransform.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpolygon.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qregion.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtCore/qline.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qkeysequence.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpainterpath.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixmap.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpaintdevice.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qcolor.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgb.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qrgba64.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qimage.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/qpixelformat.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -3434,7 +3462,6 @@ release/player.o: ../../player.cpp ../../player.h \
 		../../bullet.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QPointF \
 		../../waterpipe.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\player.o ..\..\player.cpp
 
@@ -3695,7 +3722,7 @@ release/supermushroom.o: ../../supermushroom.cpp ../../supermushroom.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QVector \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvector.h \
 		../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qevent.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevice.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpointer.h \
@@ -3714,6 +3741,7 @@ release/supermushroom.o: ../../supermushroom.cpp ../../supermushroom.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qkeysequence.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		../../boxbrick.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
@@ -3846,7 +3874,7 @@ release/toxicmushroom.o: ../../toxicmushroom.cpp ../../toxicmushroom.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/QVector \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qvector.h \
 		../../player.h \
-		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QKeyEvent \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qevent.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qiodevice.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qpointer.h \
@@ -3864,6 +3892,7 @@ release/toxicmushroom.o: ../../toxicmushroom.cpp ../../toxicmushroom.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtGui/qkeysequence.h \
+		C:/Qt6/6.2.2/mingw_64/include/QtGui/QMouseEvent \
 		../../boxbrick.h \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/QGraphicsScene \
 		C:/Qt6/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
