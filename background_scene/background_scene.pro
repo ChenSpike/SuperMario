@@ -25,7 +25,6 @@ SOURCES += \
     score.cpp \
     supermushroom.cpp \
     toxicmushroom.cpp \
-    view.cpp \
     waterpipe.cpp
 
 HEADERS += \
@@ -44,7 +43,6 @@ HEADERS += \
     score.h \
     supermushroom.h \
     toxicmushroom.h \
-    view.h \
     waterpipe.h
 
 FORMS += \

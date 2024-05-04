@@ -3,21 +3,18 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-#include <QTimer>
+//#include <QTimer>
 #include <QPointF>
 
 class Bullet : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Bullet(QGraphicsItem *parent = nullptr);
-    void setAngle(QPointF start, QPointF target);
 public slots:
-    void shoot();
+    void move();
 private:
-    QPointF startPos;
-    QPointF targetPos;
-    QTimer *shootTimer;
-    qreal speed;
+    qreal step; // moving step 15px
+    qreal trajectory; // the total distance of trajectory
 };
 
 #endif // BULLET_H

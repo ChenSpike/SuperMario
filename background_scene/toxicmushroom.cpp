@@ -7,12 +7,10 @@
 #include "floorbrick.h"
 #include "player.h"
 #include "health.h"
-#include <iostream>
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QList>
-
 
 ToxicMushroom::ToxicMushroom(QGraphicsItem *parent) : QGraphicsPixmapItem(parent)
 {
@@ -34,9 +32,11 @@ void ToxicMushroom::move()
     QList<QGraphicsItem *> colliding_item = collidingItems();
     onBrick = false;
     for (int i = 0, n = colliding_item.size(); i < n; ++i) {
-        if (typeid(*(colliding_item[i])) == typeid(WaterPipe)) {
+        if (typeid(*(colliding_item[i])) == typeid(WaterPipe) ||
+            typeid(*(colliding_item[i])) == typeid(ToxicMushroom)) {
             direction = -direction;  // 改變方向
-        } else if (typeid(*(colliding_item[i])) == typeid(BoxBrick) ||
+        }
+        else if (typeid(*(colliding_item[i])) == typeid(BoxBrick) ||
                    typeid(*(colliding_item[i])) == typeid(StoneBrick) ||
                    typeid(*(colliding_item[i])) == typeid(BrokenBrick) ||
                    typeid(*(colliding_item[i])) == typeid(FloorBrick)) {
@@ -44,20 +44,18 @@ void ToxicMushroom::move()
             velocity = 0;  // 停止垂直速度
             setY(colliding_item[i]->y() - pixmap().height());  // 調整位置以站在boxbrick上
             break;
-        }else if(typeid(*(colliding_item[i])) == typeid(Player)){
-            ///////////////////// new for player shrinking and health decreasement /////////
+        }
+        else if (typeid(*(colliding_item[i])) == typeid(Player)){
             Player *player = dynamic_cast<Player *>(colliding_item[i]);
             if(!player->isJumping){
                 if (!isCooldownActive) {
-                    Health::decreasement();
+                    Health::getInstance()->decrease();
+                    player -> setBullet(0);
                     player -> shrink();
                     qDebug() <<"toxicmushroom collids with player. " <<Qt::endl;
                     startCooldown();
-
                 }
             }
-            ///////////////////////////////////////////////////////////////////////////////////
-
         }
     }
 

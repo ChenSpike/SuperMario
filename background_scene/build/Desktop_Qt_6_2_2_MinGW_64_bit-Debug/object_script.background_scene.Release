@@ -14,7 +14,6 @@ release/player.o
 release/score.o
 release/supermushroom.o
 release/toxicmushroom.o
-release/view.o
 release/waterpipe.o
 release/qrc_background_scene_resource.o
 release/moc_boxbrick.o

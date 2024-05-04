@@ -6,19 +6,17 @@
 #include "brokenbrick.h"
 #include "normalbrick.h"
 #include "waterpipe.h"
-#include <QObject>
 #include <QBrush>
 #include <QLabel>
 #include <QPushButton>
-
-using namespace std;
+#include <QDebug>
 
 Game::Game(QWidget *parent){
     setStart(); // launch the start screen
 
     //////////////////// create background scene ////////////////////
     // create a scene
-    scene = new QGraphicsScene();
+    scene = new QGraphicsScene(this);
     scene -> setSceneRect(0, 0, 7000, 619); // scene original point:(0,0); size:7000x619
     // set the background image
     setBackgroundBrush(QBrush(QImage(":/new/dataset/dataset/background_7000pixel.png")));
@@ -30,9 +28,14 @@ Game::Game(QWidget *parent){
     resize(1400, 619); // view size:1400x619
     centerOn(0,0); // view original point:(0,0)
 
-    // create the score
+    // include the score
     score = new Score;
     scene -> addItem(score);
+
+    // include the health
+    health = new Health;
+    health -> setPos(health->x() + 200, health->y());
+    scene -> addItem(health);
     ///////////////////////////////////////////////////////////
 
     //////////////////// create the player ////////////////////
@@ -56,12 +59,13 @@ Game::Game(QWidget *parent){
 }
 
 void Game::mousePressEvent(QMouseEvent *event){
-    mario->mousePressEvent(event);
+    QPointF target = mapToScene(event->pos());
+    mario->shoot(target);
     return;
 }
 
 void Game::keyPressEvent(QKeyEvent *event){
-    mario->keyPressEvent(event);
+    QGraphicsView::keyPressEvent(event);
     qreal marioMidPos = mario->x() + (mario->pixmap().width())/2;
     auto rect = scene->sceneRect();
     if (mario->x() < rect.x()){
@@ -73,8 +77,9 @@ void Game::keyPressEvent(QKeyEvent *event){
             // view shift right
             rect.translate(mario->stepX,0);
             scene->setSceneRect(rect);
-            // Score shift right
+            // Score and Health shift right
             score->setPos(rect.x(),0);
+            health->setPos(rect.x() + 200,0);
         }
     }
     return;
