@@ -10,13 +10,11 @@ class Bullet : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     Bullet(QGraphicsItem *parent = nullptr);
-    void setAngle(QPointF start, QPointF target);
 public slots:
     void move();
 private:
-    QPointF startPos;
-    QPointF targetPos;
-    qreal step;
+    qreal step; // moving step 15px
+    qreal trajectory; // the total distance of trajectory
 };
 
 #endif // BULLET_H

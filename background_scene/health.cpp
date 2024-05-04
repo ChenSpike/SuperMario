@@ -1,26 +1,41 @@
 #include "health.h"
-#include <QDebug>
 #include <QFont>
 #include <QGraphicsView>
-#include <QGraphicsTextItem>
+#include <QDebug>
 
-Health::Health()
+Health* Health::instance = nullptr;
+
+Health::Health(QGraphicsItem *parent):
+    QGraphicsTextItem(parent),
+    hp(3)
 {
+    setPlainText(QString("HP: ") + QString::number(hp)); // HP: 3
+    setDefaultTextColor(Qt::white);
+    setFont(QFont("times", 16));
+    instance = this;
 }
 
-int Health::count = 3;
-
-int Health::decreasement(){
-    count--;
-    qDebug() <<"health decreases to " << count <<Qt::endl;
-    return count;
+Health* Health::getInstance() {
+    if (!instance)
+        instance = new Health();
+    return instance;
 }
 
-int Health::increasement(){
-    count++;
-    if(count >3){
-        count = 3;
+void Health::decrease(){
+    hp--;
+    setPlainText(QString("HP: ") + QString::number(hp)); // HP: 2
+    return;
+}
+
+void Health::increase(){
+    hp++;
+    if(hp > 3){
+        hp = 3;
     }
-    qDebug() <<"health increases to " << count <<Qt::endl;
-    return count;
+    setPlainText(QString("HP: ") + QString::number(hp)); // HP: 3
+    return;
+}
+
+int Health::getHealth() const{
+    return hp;
 }

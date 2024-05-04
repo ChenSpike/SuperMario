@@ -9,7 +9,6 @@ public:
     int getScore() const;
     void updateScoreText();
     static Score* getInstance();
-public slots:
     void increase();
 private:
     int score;

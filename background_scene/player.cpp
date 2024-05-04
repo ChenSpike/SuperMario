@@ -8,6 +8,7 @@
 #include "fireflower.h"
 #include "bullet.h"
 #include "waterpipe.h"
+#include "health.h"
 #include <QGraphicsScene>
 #include <QList>
 #include <qmath.h>
@@ -28,9 +29,7 @@ Player::Player(QGraphicsItem *parent):
 }
 
 void Player::grow() {
-    ////new for health////
-    //Health::increasement();
-    //////////////////////
+    Health::getInstance()->increase(); // hp + 1
     if (!isBig) {
         if(!isJumping){
             setPos(x(), y()-35); // reset player's position so that not to be in ground
@@ -84,23 +83,25 @@ void Player::keyPressEvent(QKeyEvent *event){
     return;
 }
 
-void Player::mousePressEvent(QGraphicsSceneMouseEvent *event){
-    shoot(event->pos());
+void Player::setBullet(int bulletNum){
+    if (bulletNum >= 0){
+        bullet = bulletNum;
+    }
+    return;
 }
 
 void Player::shoot(QPointF targetPos) {
-    QPointF target = targetPos;
-    QPointF start = mapToScene(boundingRect().center());
-    qDebug()<<"click pos:("<<target.x()<<","<<target.y()<<")"<<"mario center:("<<start.x()<<","<<start.y()<<")";
+    QPointF target = targetPos; // cursor location relative to scene
+    QPointF start = mapToScene(boundingRect().center()); // mario center relative to scene
     if (bullet > 0) {
         Bullet *fireball = new Bullet();
         fireball->setPos(start); // Start from player's center
-        // use a line to calculate degrees to fire
+        // use a line to calculate the angle of direction for firing a bullet
         QLineF ln(start, target);
-        int angle = ln.angle(); // angle() defines counter-clockwise is +deg
-        fireball->setRotation(-angle); // setRotation(-deg): counter-clockwise deg
+        int angle = ln.angle(); // angle() defines that counter-clockwise is +deg
+        fireball->setRotation(-angle); // rotate degrees in counter-clockwise
         scene()->addItem(fireball);
-        bullet--;
+        bullet--; // bullet - 1
         qDebug()<<"remaining bullet:"<<bullet;
     }
     return;
@@ -283,7 +284,7 @@ void Player::jumpStep() {
 
             grow();
             groundLevel = 435;
-            bullet = 999; // reset player with 3 ammos
+            setBullet(3); // reset player with 3 ammos
             qDebug()<<"bullet"<<bullet;
         }
     }
@@ -299,7 +300,7 @@ void Player::jumpStep() {
             velocity = 0;
         }
         else if (y() > groundLevel+pixmap().height()){
-            qDebug()<<"Die"<<t++;
+            //qDebug()<<"Die"<<t++;
             setPos(x(), groundLevel+pixmap().height());
             jumpTimer->stop();
             isJumping = false;

@@ -1,16 +1,19 @@
 #ifndef HEALTH_H
 #define HEALTH_H
+
 #include <QGraphicsTextItem>
 
-
-class Health
-{
+class Health : public QGraphicsTextItem{
 public:
-    Health();
-    static int decreasement();
-    static int increasement();
-    static int count;
+    Health(QGraphicsItem *parent = nullptr);
+    int getHealth() const;
+    void updateHealthText();
+    static Health* getInstance();
+    void increase();
+    void decrease();
 private:
+    int hp;
+    static Health* instance;
 
 };
 

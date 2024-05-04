@@ -12,15 +12,15 @@ class Player:public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Player(QGraphicsItem * parent=0);
-    void keyPressEvent(QKeyEvent *event);
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void grow();
-    void shrink();
-    bool isJumping; // state of jumping
-    void shoot(QPointF targetPos);
+    bool isJumping; // ture:jumping ; false:standing(default)
     qreal stepX;
     qreal groundLevel;
-    int t=0;
+    void grow();
+    void shrink();
+    void keyPressEvent(QKeyEvent *event);
+    void setBullet(int bulletNum);
+    void shoot(QPointF targetPos);
+    //int t=0; // test for counting death
 private:
     QTimer* jumpTimer;
     int velocity; // initial velocity

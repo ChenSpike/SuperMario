@@ -11,10 +11,6 @@
 #include <QPushButton>
 #include <QDebug>
 
-#include "bullet.h"
-
-using namespace std;
-
 Game::Game(QWidget *parent){
     setStart(); // launch the start screen
 
@@ -32,9 +28,14 @@ Game::Game(QWidget *parent){
     resize(1400, 619); // view size:1400x619
     centerOn(0,0); // view original point:(0,0)
 
-    // create the score
+    // include the score
     score = new Score;
     scene -> addItem(score);
+
+    // include the health
+    health = new Health;
+    health -> setPos(health->x() + 200, health->y());
+    scene -> addItem(health);
     ///////////////////////////////////////////////////////////
 
     //////////////////// create the player ////////////////////
@@ -76,8 +77,9 @@ void Game::keyPressEvent(QKeyEvent *event){
             // view shift right
             rect.translate(mario->stepX,0);
             scene->setSceneRect(rect);
-            // Score shift right
+            // Score and Health shift right
             score->setPos(rect.x(),0);
+            health->setPos(rect.x() + 200,0);
         }
     }
     return;

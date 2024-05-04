@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "score.h"
+#include "health.h"
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -17,6 +18,7 @@ public:
     QGraphicsScene *scene;
     Player *mario;
     Score *score;
+    Health *health;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
 private:

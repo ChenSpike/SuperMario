@@ -21,8 +21,8 @@ void Score::increase(){
     qDebug()<<"increase";
     score++;
     setPlainText(QString("Score: ") + QString::number(score));
+    return;
 }
-
 
 int Score::getScore() const{
     return score;
