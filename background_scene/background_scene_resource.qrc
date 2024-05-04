@@ -28,5 +28,9 @@
         <file>dataset/super mushroom.png</file>
         <file>dataset/mario_L_run1.png</file>
         <file>dataset/mario_R_run1.png</file>
+        <file>dataset/bullet.png</file>
+        <file>dataset/toxic mushroom1.png</file>
+        <file>dataset/toxic mushroom2.png</file>
+        <file>dataset/toxic mushroom3.png</file>
     </qresource>
 </RCC>

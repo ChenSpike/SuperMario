@@ -51,6 +51,6 @@ void BrokenBrick::breakBrick(BrokenBrick *brokenbrick){
             i++;
         }
     }
-    delete this;
+    delete brokenbrick;
     return;
 }

@@ -68,6 +68,7 @@ void SuperMushroom::move(){
             scene()->removeItem(this);
             moveTimer->stop();
             player->grow();
+            player->groundLevel = 435;
             delete this;
             return;
         }
@@ -183,26 +184,3 @@ void SuperMushroom::move(){
     setPos(x() + velocityX, y() + velocityY);
     return;
 }
-
-/*
-bool SuperMushroom::standingBrick(){
-    if(this->y() + pixmap().height() >= 470){
-        if ((this->x() >= 2450 && this->x() <= 2500) ||
-            (this->x() >= 3450 && this->x() <= 3500) ||
-            (this->x() >= 4300 && this->x() <= 4350) ){
-            return false;
-        }
-    }
-    for(int i=0 ; i<BoxBrick::BoxBricks.length() ; i++){
-        qDebug()<<"Finding box"<<t++;
-        BoxBrick *boxbrick = BoxBrick::BoxBricks[i];
-        if (boxbrick->y() > y()){
-            qDebug()<<"above some bricks"<<t++;
-            if (boxbrick->x() + boxbrick->pixmap().width() < x() || boxbrick->x() > x()){
-                qDebug()<<"found";
-                return false;
-            }
-        }
-    }
-    return true;
-}*/

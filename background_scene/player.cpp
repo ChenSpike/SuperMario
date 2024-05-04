@@ -4,28 +4,49 @@
 #include "normalbrick.h"
 #include "coin.h"
 #include "score.h"
-#include "supermushroom.h"
+#include "toxicmushroom.h"
+#include "fireflower.h"
+#include "bullet.h"
+#include "waterpipe.h"
 #include <QGraphicsScene>
-#include <QKeyEvent>
 #include <QList>
 #include <QDebug>
 
 Player::Player(QGraphicsItem *parent):
     QGraphicsPixmapItem(parent),
+    isJumping(false),
+    stepX(25),
+    groundLevel(470),
     jumpTimer(new QTimer(this)),
     velocity(0), // initial velocity
-    maxHeight(100), // maximum jumping height
-    isJumping(false),
-    isBig(false)
+    isBig(false),
+    bullet(0)
 {
     setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png")); // set initial mario pose
     connect(jumpTimer, &QTimer::timeout, this, &Player::jumpStep);
 }
 
 void Player::grow() {
+    ////new for health////
+    //Health::increasement();
+    //////////////////////
     if (!isBig) {
+        if(!isJumping){
+            setPos(x(), y()-35); // reset player's position so that not to be in ground
+        }
         setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
         isBig = true;
+    }
+}
+
+void Player::shrink() {
+    if (isBig) {
+        if(!isJumping){
+            //setting player's position so that not to be in air
+            setPos(x(), y()+35);
+        }
+        setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
+        isBig = false;
     }
     return;
 }
@@ -36,7 +57,7 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPixmap(QPixmap(":/new/dataset/dataset/mario_L_run1.png"));
         else
             setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_L.png"));
-        setPos(x()-25, y());
+        setPos(x()-stepX, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
@@ -46,7 +67,7 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPixmap(QPixmap(":/new/dataset/dataset/mario_R_run1.png"));
         else
             setPixmap(QPixmap(":/new/dataset/dataset/s_mario_run1_R.png"));
-        setPos(x()+25, y());
+        setPos(x()+stepX, y());
         if (!isJumping) {
             jumpStep();  // Trigger gravity check after movement
         }
@@ -62,10 +83,35 @@ void Player::keyPressEvent(QKeyEvent *event){
     return;
 }
 
+void Player::mousePressEvent(QMouseEvent *event){
+    shoot(event->pos());
+}
+
+void Player::shoot(QPointF targetPos) {
+    qDebug()<<"click pos:("<<targetPos.x()<<","<<targetPos.y()<<")";
+    if (bullet > 0) {
+        QPointF target = mapToScene(targetPos);
+        QPointF start = mapToScene(boundingRect().center()); // Start from player's center
+        Bullet *fireball = new Bullet();
+        fireball->setAngle(start, target);
+        scene()->addItem(fireball);
+        bullet--;
+        qDebug()<<"remaining bullet:"<<bullet;
+    }
+    return;
+}
+
+
 void Player::jumpStep() {
+    //qDebug()<<t++;
     setPos(x(), y() + velocity);
     jumpTimer->start(20);
     velocity += 1; // 模拟重力影响
+
+    // no jumping during falling
+    if (velocity > 0 && !isJumping){
+        isJumping = true;
+    }
 
     // get the item collided with the player
     QList<QGraphicsItem* > colliding_items = collidingItems();
@@ -100,11 +146,11 @@ void Player::jumpStep() {
             if (x() < boxbrick->x() + boxbrick->pixmap().width() && x() + pixmap().width() > boxbrick->x()) {
                 if (x() < boxbrick->x()) {
                     setPos(boxbrick->x() - pixmap().width(), y());
-                    qDebug()<<"hit left";
+                    // qDebug()<<"hit left";
                 }
                 else {
                     setPos(boxbrick->x() + boxbrick->pixmap().width(), y());
-                    qDebug()<<"hit right";
+                    // qDebug()<<"hit right";
                 }
             }
         }
@@ -179,26 +225,81 @@ void Player::jumpStep() {
             }
         }
 
+        // collided with Water Pipe
+        if(typeid(*(colliding_items[i])) == typeid(WaterPipe)){
+            WaterPipe *waterpipe = dynamic_cast<WaterPipe *>(colliding_items[i]);
+
+            // landing on the top
+            if (velocity > 0 && pos().y() + pixmap().height() < waterpipe->y() + waterpipe->pixmap().height()) {
+                setPos(x(), waterpipe->y() - pixmap().height());
+                velocity = 0;
+                isJumping = false;
+                jumpTimer->stop();
+                break;
+            }
+
+            // side collisions
+            if (x() < waterpipe->x() + waterpipe->pixmap().width() && x() + pixmap().width() > waterpipe->x()) {
+                if (x() < waterpipe->x()) {
+                    setPos(waterpipe->x() - pixmap().width(), y());
+                    qDebug()<<"hit left";
+                }
+                else {
+                    setPos(waterpipe->x() + waterpipe->pixmap().width(), y());
+                    qDebug()<<"hit right";
+                }
+            }
+        }
+
         // collided with Coin
         if (typeid(*(colliding_items[i])) == typeid(Coin)) {
             Coin *coin = dynamic_cast<Coin*>(colliding_items[i]);
-            scene()->removeItem(coin); // delete the coin
-            delete coin; // release memory
             Score::getInstance()->increase(); // score + 1
+            qDebug()<<"a coin";
+            coin->deleteCoin(coin);
         }
 
-        // collided with Super Mushroom
-        if(typeid(*(colliding_items[i])) == typeid(SuperMushroom)) {
+        // collided with toxic mushroom
+        if (typeid(*(colliding_items[i])) == typeid(ToxicMushroom)) {
+            ToxicMushroom *toxicmushroom = dynamic_cast<ToxicMushroom *>(colliding_items[i]);
+            // jump onto toxic mushroom
+            if (isJumping && y() + pixmap().height() > toxicmushroom->y()) {
+                toxicmushroom->breakToxicMushroom();
+                break;
+            }
+
+        }
+
+        // collided with fire flower
+        if(typeid(*(colliding_items[i])) == typeid(FireFlower)) {
+            FireFlower *fireflower = dynamic_cast<FireFlower*>(colliding_items[i]);
+            scene()->removeItem(fireflower); // delete the fire flower
+            delete fireflower;
+
             grow();
+            groundLevel = 435;
+            bullet = 3; // reset player with 3 ammos
+            qDebug()<<"bullet"<<bullet;
         }
     }
 
-    // 检查是否完成跳跃（是否回到了初始高度或更低）
-    if (pos().y() > 470) {
-        jumpTimer->stop();
-        setPos(x(), 470); // 重置到地面
-        isJumping = false; // 结束跳跃
-        velocity = 0; // 重置速度
+    // fall on the ground
+    if (y() > groundLevel) {
+        if ((x() < 2450 || x() > 2500) &&
+            (x() < 3450 || x() > 3500) &&
+            (x() < 4300 || x() > 4350) ){
+            setPos(x(), groundLevel);
+            jumpTimer->stop();
+            isJumping = false;
+            velocity = 0;
+        }
+        else if (y() > groundLevel+pixmap().height()){
+            qDebug()<<"Die"<<t++;
+            setPos(x(), groundLevel+pixmap().height());
+            jumpTimer->stop();
+            isJumping = false;
+            velocity = 0;
+        }
     }
     return;
 }

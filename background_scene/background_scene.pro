@@ -11,31 +11,40 @@ CONFIG += c++11
 SOURCES += \
     boxbrick.cpp \
     brokenbrick.cpp \
+    bullet.cpp \
     castle.cpp \
     coin.cpp \
     fireflower.cpp \
     floorbrick.cpp \
+    game.cpp \
+    health.cpp \
     main.cpp \
     mainwindow.cpp \
     normalbrick.cpp \
     player.cpp \
     score.cpp \
     supermushroom.cpp \
+    toxicmushroom.cpp \
+    view.cpp \
     waterpipe.cpp
 
 HEADERS += \
     boxbrick.h \
+    bullet.h \
     castle.h \
     coin.h \
     brokenbrick.h \
     fireflower.h \
     floorbrick.h \
     game.h \
+    health.h \
     mainwindow.h \
     normalbrick.h \
     player.h \
     score.h \
     supermushroom.h \
+    toxicmushroom.h \
+    view.h \
     waterpipe.h
 
 FORMS += \
