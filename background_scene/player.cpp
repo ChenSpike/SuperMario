@@ -10,6 +10,7 @@
 #include "waterpipe.h"
 #include <QGraphicsScene>
 #include <QList>
+#include <qmath.h>
 #include <QDebug>
 
 Player::Player(QGraphicsItem *parent):
@@ -83,17 +84,21 @@ void Player::keyPressEvent(QKeyEvent *event){
     return;
 }
 
-void Player::mousePressEvent(QMouseEvent *event){
+void Player::mousePressEvent(QGraphicsSceneMouseEvent *event){
     shoot(event->pos());
 }
 
 void Player::shoot(QPointF targetPos) {
-    qDebug()<<"click pos:("<<targetPos.x()<<","<<targetPos.y()<<")";
+    QPointF target = targetPos;
+    QPointF start = mapToScene(boundingRect().center());
+    qDebug()<<"click pos:("<<target.x()<<","<<target.y()<<")"<<"mario center:("<<start.x()<<","<<start.y()<<")";
     if (bullet > 0) {
-        QPointF target = mapToScene(targetPos);
-        QPointF start = mapToScene(boundingRect().center()); // Start from player's center
         Bullet *fireball = new Bullet();
-        fireball->setAngle(start, target);
+        fireball->setPos(start); // Start from player's center
+        // use a line to calculate degrees to fire
+        QLineF ln(start, target);
+        int angle = ln.angle(); // angle() defines counter-clockwise is +deg
+        fireball->setRotation(-angle); // setRotation(-deg): counter-clockwise deg
         scene()->addItem(fireball);
         bullet--;
         qDebug()<<"remaining bullet:"<<bullet;
@@ -278,7 +283,7 @@ void Player::jumpStep() {
 
             grow();
             groundLevel = 435;
-            bullet = 3; // reset player with 3 ammos
+            bullet = 999; // reset player with 3 ammos
             qDebug()<<"bullet"<<bullet;
         }
     }

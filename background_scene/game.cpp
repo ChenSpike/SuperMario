@@ -6,10 +6,12 @@
 #include "brokenbrick.h"
 #include "normalbrick.h"
 #include "waterpipe.h"
-#include <QObject>
 #include <QBrush>
 #include <QLabel>
 #include <QPushButton>
+#include <QDebug>
+
+#include "bullet.h"
 
 using namespace std;
 
@@ -18,7 +20,7 @@ Game::Game(QWidget *parent){
 
     //////////////////// create background scene ////////////////////
     // create a scene
-    scene = new QGraphicsScene();
+    scene = new QGraphicsScene(this);
     scene -> setSceneRect(0, 0, 7000, 619); // scene original point:(0,0); size:7000x619
     // set the background image
     setBackgroundBrush(QBrush(QImage(":/new/dataset/dataset/background_7000pixel.png")));
@@ -56,12 +58,13 @@ Game::Game(QWidget *parent){
 }
 
 void Game::mousePressEvent(QMouseEvent *event){
-    mario->mousePressEvent(event);
+    QPointF target = mapToScene(event->pos());
+    mario->shoot(target);
     return;
 }
 
 void Game::keyPressEvent(QKeyEvent *event){
-    mario->keyPressEvent(event);
+    QGraphicsView::keyPressEvent(event);
     qreal marioMidPos = mario->x() + (mario->pixmap().width())/2;
     auto rect = scene->sceneRect();
     if (mario->x() < rect.x()){

@@ -3,7 +3,7 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
-#include <QTimer>
+//#include <QTimer>
 #include <QPointF>
 
 class Bullet : public QObject, public QGraphicsPixmapItem {
@@ -12,12 +12,11 @@ public:
     Bullet(QGraphicsItem *parent = nullptr);
     void setAngle(QPointF start, QPointF target);
 public slots:
-    void shoot();
+    void move();
 private:
     QPointF startPos;
     QPointF targetPos;
-    QTimer *shootTimer;
-    qreal speed;
+    qreal step;
 };
 
 #endif // BULLET_H

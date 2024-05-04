@@ -9,6 +9,7 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QDialog>
+#include <QGraphicsPixmapItem>
 
 class Game: public QGraphicsView{
 public:
@@ -18,11 +19,11 @@ public:
     Score *score;
     void mousePressEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
-public slots:
-    void closeStart();
 private:
     QDialog* start;
     void setStart();
+private slots:
+    void closeStart();
 };
 
 #endif // GAME_H

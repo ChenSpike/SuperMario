@@ -4,7 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 #include <QKeyEvent>
-#include <QMouseEvent>
+#include <QGraphicsSceneMouseEvent>
 #include <QObject>
 #include <QTimer>
 
@@ -13,7 +13,7 @@ class Player:public QObject, public QGraphicsPixmapItem{
 public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void grow();
     void shrink();
     bool isJumping; // state of jumping

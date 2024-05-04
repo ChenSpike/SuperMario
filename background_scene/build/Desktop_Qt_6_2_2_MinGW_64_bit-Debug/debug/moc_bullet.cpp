@@ -23,18 +23,18 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Bullet_t {
     const uint offsetsAndSize[6];
-    char stringdata0[14];
+    char stringdata0[13];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Bullet_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_Bullet_t qt_meta_stringdata_Bullet = {
     {
 QT_MOC_LITERAL(0, 6), // "Bullet"
-QT_MOC_LITERAL(7, 5), // "shoot"
-QT_MOC_LITERAL(13, 0) // ""
+QT_MOC_LITERAL(7, 4), // "move"
+QT_MOC_LITERAL(12, 0) // ""
 
     },
-    "Bullet\0shoot\0"
+    "Bullet\0move\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,7 +66,7 @@ void Bullet::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         auto *_t = static_cast<Bullet *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->shoot(); break;
+        case 0: _t->move(); break;
         default: ;
         }
     }
